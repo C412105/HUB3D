@@ -9,23 +9,35 @@ nav {
     background-color: #262624;
 }
 
-h1 {
+/* Classes (i.e. navbar-brand, nav-link) should supersede tags */
+h1.navbar-brand {
   background: linear-gradient(to right, #003f82, #4ca2b5);
-    color: transparent;
-    background-clip: text;
-  font-family: verdana;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-clip: text;
+  font-family: Arial;
   font-size: 300%;
-  /* border: 2px solid aquamarine; */
-  /* padding: 30px;
-  margin: 50px; */
-  /* text-align: center; */
+  font-style: bold;
+  }
+
+a.nav-link {
+    color: #ffffff;
+    font-size: 150%;
 }
 
-a {
-    color: #ffff;
+h2 {
+  color: #ffffff;
+  font-family: Arial;
+  }
+
+p {
+  color: #ffffff;
+  font-family: Arial;
 }
 
-button{
-    background-color: #545454;
-    outline: #ffff;
+button.btn {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  font-family: Arial;
 }
