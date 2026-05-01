@@ -49,6 +49,10 @@ button.btn:hover {
     color: #5db1ff;
 }
 
+label {
+  color: #ffffff;
+}
+
 /* TITLE */
 h2 {
   color: #ffffff;

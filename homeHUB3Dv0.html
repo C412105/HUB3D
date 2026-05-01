@@ -106,19 +106,16 @@
 
     <div class="container mb-5">
         <div id="login">
-            <form>
-                <!-- <br> es para espaciado -->
-                <label>Nombre: </label>
-                <input type="text" name="Nombre"><br><br>
-
-                <label>Email: </label>
-                <input type="email" name="Correo"><br><br>
-
-                <input type="checkbox" name="Términos">Acepto los términos<br><br>
-
-                <button type="submit">Enviar</button>
-
-            </form>
+            <div class="mb-3">
+                <label class="form-label">Email address</label>
+                <input type="email" class="form-control" id="InputEmail1">
+                <div class="form-text">I'll never share your email with anyone or anything.</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" id="InputPassword1">
+            </div>
+            <button type="submit" class="btn btn-primary">Log in</button>
         </div>
     </div>
 
