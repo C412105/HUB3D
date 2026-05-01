@@ -1,23 +1,29 @@
 /* https://cssgradient.io/ */
+
+/* GLOBAL */
 body {
   --bs-gradient: linear-gradient(45deg, #000000, #003f82, #4ca2b5);
   background-image: var(--bs-gradient);
   min-height: 100vh; /* makes the gradient fill the full screen height */
+  font-family: Arial, sans-serif;
+  padding-bottom: 60px;
 }
 
-nav {
+/* NAVBAR */
+nav#navbar {
     background-color: #262624;
+    border-radius: 16px;/* rounded corners */
 }
 
-/* Classes (i.e. navbar-brand, nav-link) should supersede tags */
+/* Classes (i.e. navbar-brand, nav-link) superseding tags */
 h1.navbar-brand {
   background: linear-gradient(to right, #003f82, #4ca2b5);
   -webkit-background-clip: text;
-  color: transparent;
   background-clip: text;
-  font-family: Arial;
-  font-size: 300%;
-  font-style: bold;
+  color: transparent;
+  font-size: 250%;
+  font-weight: bold;
+  margin-bottom: 0;
   }
 
 a.nav-link {
@@ -25,19 +31,89 @@ a.nav-link {
     font-size: 150%;
 }
 
+a.nav-link:hover {
+    color: #5db1ff;/* highlight */
+}
+
+/* Login/Signup buttons */
+button.btn {
+    background-color: transparent;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+button.btn:hover {
+    background-color: #004789;/* To be changed? */
+    border-color: #5db1ff;
+    color: #5db1ff;
+}
+
+/* TITLE */
 h2 {
   color: #ffffff;
-  font-family: Arial;
   }
 
 p {
   color: #ffffff;
-  font-family: Arial;
 }
 
-button.btn {
-  background-color: transparent;
-  color: #ffffff;
-  border: 1px solid #ffffff;
-  font-family: Arial;
+/* SEARCH BAR / FILTERS */
+#searchSection input,
+#searchSection select {
+    background-color: #262624;
+    color: #ffffff;
+    border: 1px solid #545454;
+    max-width: 340px;
+}
+
+/* Placeholder text colour */
+#searchSection input::placeholder {
+    color: #545454;
+}
+
+/* Dropdown background */
+#searchSection select option {
+    background-color: #262624;
+    color: #ffffff;
+}
+
+/* CAROUSEL */
+#sitesCarousel {
+    background-color: rgba(38, 38, 36, 0.5);
+    border-radius: 16px;
+    padding: 24px 48px; /* spacing between logos & arrows */
+}
+
+/* Logo images */
+.carousel-logo {
+    height: 200px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+/* Caption text under each logo */
+p.carousel-caption-text {
+    color: #ffffff;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
+p.carousel-caption-text small {
+    color: #4ca2b5;
+    font-size: 0.75rem;
+}
+
+/* LOGIN */
+#login {
+    background-color: rgba(38, 38, 36, 0.5);
+    border-radius: 16px;
+    padding: 24px 48px;
+}
+
+/* NAVBAR */
+#disclaimer {
+    background-color: #262624;
+    border-radius: 16px;/* rounded corners */
 }

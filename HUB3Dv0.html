@@ -13,12 +13,15 @@
     <!-- NavBar -->
     <nav id="navbar" class="navbar navbar-expand-lg mx-3 my-3">
         <div class="container-fluid">
-            <h1 class="navbar-brand" href="#">HUB3D</h1>
 
+            <!-- Logo / brand -->
+            <h1 class="navbar-brand mb-0">HUB3D</h1>
+
+            <!-- Navigation links — ms-auto aligns them right -->
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto me-4">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">My equipment</a>
+                        <a class="nav-link" href="#">My Equipment</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Designs</a>
@@ -26,15 +29,18 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Profile</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
                 </ul>
             </div>
-        </div>
-        
-        <div>
-            <form class="container-fluid justify-content-start">
-                <button class="btn btn-sm me-2" type="button">Login</button>
-                <button class="btn btn-sm me-2" type="button">Sign up</button>
-            </form>
+
+            <!-- Account buttons — d-flex makes them horizontal, gap-2 separates them -->
+            <div class="d-flex gap-2">
+                <button class="btn btn-sm" type="button">Login</button>
+                <button class="btn btn-sm" type="button">Sign up</button>
+            </div>
+
         </div>
     </nav>
 
@@ -44,36 +50,43 @@
         <p>Browse thousands of designs from top sites — filtered for your exact printers and filaments.</p>
     </div>
 
-    <!-- Carousel (ID used for controls) -->
-    <div class="container text-center">
-        <!-- <h2>Supported third-party design websites</h2>   -->
+<!-- Carousel (ID used for controls) -->
+    <div class="container mb-5">
         <div id="sitesCarousel" class="carousel slide" data-bs-ride="carousel">
 
-        <!-- Indicators -->
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#sitesCarousel" data-bs-slide-to="0" class="active"></button>
-                <button type="button" data-bs-target="#sitesCarousel" data-bs-slide-to="1"></button>
-                <button type="button" data-bs-target="#sitesCarousel" data-bs-slide-to="2"></button>
-                <button type="button" data-bs-target="#sitesCarousel" data-bs-slide-to="3"></button>
-            </div>
-
-                <!-- Slides -->
+            <!-- Indicators (4 websites per carousel-item) -->
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="Media/MyMiniFactoryLogo.png" alt="MyMiniFactory" style="width:50%;">
-                </div>
-                <div class="carousel-item">
-                    <img src="Media/Cults3DLogo.png" alt="Cults3D" style="width:50%;">
-                </div>
-                <div class="carousel-item">
-                    <img src="Media/ThingiverseLogo.png" alt="Thingiverse" style="width:50%;">
-                </div>
-                <div class="carousel-item">
-                    <img src="Media/PrintablesLogo.png" alt="Printables" style="width:50%;">
+                    <div class="row justify-content-center align-items-center g-3">
+                        <div class="col-3 text-center">
+                            <a href="https://www.myminifactory.com" target="_blank">
+                                <img src="Media/MyMiniFactoryLogo.png" alt="MyMiniFactory" class="img-fluid carousel-logo">
+                            </a>
+                            <p class="mt-2 carousel-caption-text">MyMiniFactory<br><small>Community</small></p>
+                        </div>
+                        <div class="col-3 text-center">
+                            <a href="https://cults3d.com" target="_blank">
+                                <img src="Media/Cults3DLogo.png" alt="Cults3D" class="img-fluid carousel-logo">
+                            </a>
+                            <p class="mt-2 carousel-caption-text">Cults3D<br><small>Free + Paid</small></p>
+                        </div>
+                        <div class="col-3 text-center">
+                            <a href="https://www.thingiverse.com" target="_blank">
+                                <img src="Media/ThingiverseLogo.png" alt="Thingiverse" class="img-fluid carousel-logo">
+                            </a>
+                            <p class="mt-2 carousel-caption-text">Thingiverse<br><small>Free designs</small></p>
+                        </div>
+                        <div class="col-3 text-center">
+                            <a href="https://www.printables.com" target="_blank">
+                                <img src="Media/PrintablesLogo.png" alt="Printables" class="img-fluid carousel-logo">
+                            </a>
+                            <p class="mt-2 carousel-caption-text">Printables<br><small>By Josef Prusa</small></p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-                <!-- Controls -->
+            <!-- Prev / Next controls (useful when more sites are added later) -->
             <button class="carousel-control-prev" type="button" data-bs-target="#sitesCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon"></span>
                 <span class="visually-hidden">Previous</span>
@@ -86,6 +99,35 @@
         </div>
     </div>
 
+    <!-- Placeholder spacing -->
+    <div class="container mb-5 mt-5">
+        <p>a</p>
+    </div>
+
+    <div class="container mb-5">
+        <div id="login">
+            <form>
+                <!-- <br> es para espaciado -->
+                <label>Nombre: </label>
+                <input type="text" name="Nombre"><br><br>
+
+                <label>Email: </label>
+                <input type="email" name="Correo"><br><br>
+
+                <input type="checkbox" name="Términos">Acepto los términos<br><br>
+
+                <button type="submit">Enviar</button>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer disclaimer -->
+    <footer id="disclaimer">
+        <p class="mb-0 text-center">For educational purposes only · Not for commercial use · HUB3D 2026</p>
+    </footer>
+
+    <!-- Bootstrap / JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     
 </body>
