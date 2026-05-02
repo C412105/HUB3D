@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Equipment - HUB3D</title>
-    <script src="HUB3dv0.js"></script>
+    <title>My Equipment - HUB3D</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="HUB3Dvo.css">
+    <script src="HUB3dv0.js" defer></script>
 </head>
 <body>
    
-    <!-- NavBar -->
+    /* ========================== NAVBAR ==========================*/
     <nav id="navbar" class="navbar navbar-expand-lg mx-3 my-3">
         <div class="container-fluid">
 
@@ -21,32 +22,101 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto me-4">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">My Equipment</a>
+                        <a class="nav-link disabled" aria-disabled="true">My Equipment</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Designs</a>
+                        <a class="nav-link" href="designsHUB3Dv0.html">Designs</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Profile</a>
+                        <a class="nav-link" href="profileHUB3Dv0.html">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="contactHUB3Dv0.html">Contact</a>
                     </li>
                 </ul>
             </div>
 
-            <!-- Account buttons — d-flex makes them horizontal, gap-2 separates them -->
-            <div class="d-flex gap-2">
-                <button class="btn btn-sm" type="button">Login</button>
-                <button class="btn btn-sm" type="button">Sign up</button>
+            <!-- Avatar / user indicators replaces Login/Signup buttons after log in -->
+            <div class="d-flex align-items-center me-2">
+                <div id="profileAvatar" style="width:38px; height:38px; font-size:1rem;">U</div>
             </div>
 
         </div>
     </nav>
 
+    /* ========================== CONTENT ==========================*/
+    <main class="page-content container mt-4 mb-5">
 
+        <!-- PRINTERS SECTION -->
+        <h3 class="mb-3">Select your printer(s)</h3>
+        <!-- To do: Setup backend to read which checkboxes are checked to apply filters (checking if label has .active style is added after input) -->
+        <!-- btn-check + <label> is Bootstrap's toggle for checkboxes.  -->
+        <!-- Hidden <input type="checkbox"> linked to <label> with id/for. -->
+        <!-- aria-label  assigns a string value to the element, readable by CSS -->
+       
+        <div class="equipment-group mb-5" role="group" aria-label="Printer selection">
+            <input type="checkbox" class="btn-check" id="printer-ender3" autocomplete="off">
+            <label class="btn" for="printer-ender3">Ender 3</label>
 
-    <!-- Footer disclaimer -->
+            <input type="checkbox" class="btn-check" id="printer-ender3pro" autocomplete="off">
+            <label class="btn" for="printer-ender3pro">Ender 3 Pro</label>
+
+            <input type="checkbox" class="btn-check" id="printer-prusaMK4" autocomplete="off">
+            <label class="btn" for="printer-prusaMK4">Prusa MK4</label>
+
+            <input type="checkbox" class="btn-check" id="printer-bambuX1" autocomplete="off">
+            <label class="btn" for="printer-bambuX1">Bambu Lab X1</label>
+
+            <input type="checkbox" class="btn-check" id="printer-bambuP1S" autocomplete="off">
+            <label class="btn" for="printer-bambuP1S">Bambu Lab P1S</label>
+
+            <input type="checkbox" class="btn-check" id="printer-kobra" autocomplete="off">
+            <label class="btn" for="printer-kobra">Anycubic Kobra</label>
+
+            <input type="checkbox" class="btn-check" id="printer-voron" autocomplete="off">
+            <label class="btn" for="printer-voron">Voron 2.4</label>
+
+            <input type="checkbox" class="btn-check" id="printer-artillery" autocomplete="off">
+            <label class="btn" for="printer-artillery">Artillery Sidewinder</label>
+        </div>
+
+        <!-- FILAMENTS SECTION -->
+        <h3 class="mb-3">Select your filament(s)</h3>
+        <div class="equipment-group mb-4" role="group" aria-label="Filament selection">
+            <input type="checkbox" class="btn-check" id="fil-pla" autocomplete="off">
+            <label class="btn" for="fil-pla">PLA</label>
+
+            <input type="checkbox" class="btn-check" id="fil-petg" autocomplete="off">
+            <label class="btn" for="fil-petg">PETG</label>
+
+            <input type="checkbox" class="btn-check" id="fil-abs" autocomplete="off">
+            <label class="btn" for="fil-abs">ABS</label>
+
+            <input type="checkbox" class="btn-check" id="fil-tpu" autocomplete="off">
+            <label class="btn" for="fil-tpu">TPU</label>
+
+            <input type="checkbox" class="btn-check" id="fil-asa" autocomplete="off">
+            <label class="btn" for="fil-asa">ASA</label>
+
+            <input type="checkbox" class="btn-check" id="fil-nylon" autocomplete="off">
+            <label class="btn" for="fil-nylon">Nylon</label>
+
+            <input type="checkbox" class="btn-check" id="fil-hips" autocomplete="off">
+            <label class="btn" for="fil-hips">HIPS</label>
+
+            <input type="checkbox" class="btn-check" id="fil-resin" autocomplete="off">
+            <label class="btn" for="fil-resin">Resin</label>
+        </div>
+
+        <!-- Save / Reset -->
+        <div class="equipment-actions">
+            <button class="btn btn-sm" type="button">Reset</button>
+            <button class="btn btn-sm" type="button">Save</button>
+        </div>
+
+    </main>
+
+    /* ========================== FOOTER ==========================*/
     <footer id="disclaimer">
         <p class="mb-0 text-center">For educational purposes only · Not for commercial use · HUB3D 2026</p>
     </footer>
