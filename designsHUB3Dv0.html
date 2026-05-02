@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Designs - HUB3D</title>
-    <script src="HUB3dv0.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="HUB3Dvo.css">
+    <script src="HUB3dv0.js" defer></script>
 </head>
 <body>
    
-    <!-- NavBar -->
+    /* ========================== NAVBAR ==========================*/
     <nav id="navbar" class="navbar navbar-expand-lg mx-3 my-3">
         <div class="container-fluid">
 
@@ -21,149 +22,266 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto me-4">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">My Equipment</a>
+                        <a class="nav-link" href="equipmentHUB3Dv0.html">My Equipment</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Designs</a>
+                        <a class="nav-link disabled" aria-disabled="true">Designs</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Profile</a>
+                        <a class="nav-link" href="profileHUB3Dv0.html">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="contactHUB3Dv0.html">Contact</a>
                     </li>
                 </ul>
             </div>
 
-            <!-- Account buttons — d-flex makes them horizontal, gap-2 separates them -->
-            <div class="d-flex gap-2">
-                <button class="btn btn-sm" type="button">Login</button>
-                <button class="btn btn-sm" type="button">Sign up</button>
+            <!-- Account buttons — d-flex makes them horizontal -->
+            <div class="d-flex align-items-center me-2">
+                <div id="profileAvatar" style="width:38px; height:38px; font-size:1rem;">U</div>
             </div>
 
         </div>
     </nav>
 
-    <!-- Search bar & rating filter -->
-    <div id="searchSection" class="container mb-5">
-        <div class="d-flex gap-3 justify-content-center align-items-center flex-wrap">
+    /* ========================== CONTENT ==========================*/
+    <main class="page-content container mt-4 mb-5">
 
-            <!-- Keyword search input -->
-            <input
-                type="text"
-                id="searchInput"
-                class="form-control"
-                placeholder="Search designs..."
-                aria-label="Search designs"
-            >
-
-            <!-- Rating filter dropdown -->
-            <select id="ratingFilter" class="form-select" aria-label="Filter by rating">
-                <option value="">All ratings</option>
-                <option value="5">★★★★★ 5 stars</option>
-                <option value="4">★★★★☆ 4+ stars</option>
-                <option value="3">★★★☆☆ 3+ stars</option>
-            </select>
-
-            <button class="btn btn-sm" type="button">Search</button>
+        <!-- Search bar -->
+        <div id="searchSection" class="mb-3">
+            <div class="d-flex gap-3 align-items-center flex-wrap">
+                <input type="text" id="searchInput" class="form-control"
+                       placeholder="Search designs..." aria-label="Search designs">
+                <select id="ratingFilter" class="form-select" aria-label="Filter by rating">
+                    <option value="">All ratings</option>
+                    <option value="5">★★★★★ 5 stars</option>
+                    <option value="4">★★★★☆ 4+ stars</option>
+                    <option value="3">★★★☆☆ 3+ stars</option>
+                </select>
+                <button class="btn btn-sm" type="button">Search</button>
+            </div>
         </div>
-    </div>
 
-    <!-- Carousel (ID used for controls) -->
-    <div class="container mb-5">
-        <div id="designsCarousel" class="carousel slide" data-bs-ride="carousel">
+        <!-- Filter dropdowns (in a row) -->
+        <!-- TO DO: Add all options here as hidden, to be made visible on backend by user selection/setup -->
+        <div class="d-flex gap-3 align-items-center flex-wrap mb-3">
+            <span class="text-white">Filter by</span>
+            <select class="form-select" style="max-width:160px; background:#262624; color:#fff; border-color:#545454;">
+                <option>All printers</option>
+                <option>Ender 3</option>
+                <option>Prusa MK4</option>
+            </select>
+            <select class="form-select" style="max-width:160px; background:#262624; color:#fff; border-color:#545454;">
+                <option>All filaments</option>
+                <option>PLA</option>
+                <option>PETG</option>
+            </select>
+            <select class="form-select" style="max-width:180px; background:#262624; color:#fff; border-color:#545454;">
+                <option>All sources</option>
+                <option>Thingiverse</option>
+                <option>Printables</option>
+                <option>MyMiniFactory</option>
+                <option>Cults3D</option>
+            </select>
+        </div>
 
-            <!-- Indicators (4 websites per carousel-item) -->
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="row justify-content-center align-items-center g-3">
-                        
-                        <div class="card" style="width: 18rem;">
-                            <img src="Media/image-placeholder.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">An item</li>
-                                <li class="list-group-item">A second item</li>
-                                <li class="list-group-item">A third item</li>
-                            </ul>
-                            <div class="card-body">
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
-                            </div>
-                        </div>
-                        
-                        <div class="card" style="width: 18rem;">
-                            <img src="Media/image-placeholder.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">An item</li>
-                                <li class="list-group-item">A second item</li>
-                                <li class="list-group-item">A third item</li>
-                            </ul>
-                            <div class="card-body">
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
-                            </div>
-                        </div>
-                        
-                        <div class="card" style="width: 18rem;">
-                            <img src="Media/image-placeholder.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">An item</li>
-                                <li class="list-group-item">A second item</li>
-                                <li class="list-group-item">A third item</li>
-                            </ul>
-                            <div class="card-body">
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
-                            </div>
-                        </div>
+        <!-- Pills for "My setup only" and "Favourites" filters. Click calls functions to toggle state -->
+        <!-- TO DO: Backend filter logic -->
+        <div class="d-flex gap-3 mb-4">
+            <button class="filter-indicator ind-off" id="indSetup"
+                    onclick="toggleIndicator('indSetup', 'ind-green')">
+                ✓ My setup only
+            </button>
+            <button class="filter-indicator ind-off" id="indFavs"
+                    onclick="toggleIndicator('indFavs', 'ind-blue')">
+                ♡ Favourites
+            </button>
+        </div>
 
-                        <div class="card" style="width: 18rem;">
-                            <img src="Media/image-placeholder.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">An item</li>
-                                <li class="list-group-item">A second item</li>
-                                <li class="list-group-item">A third item</li>
-                            </ul>
-                            <div class="card-body">
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
-                            </div>
+        <!-- Designs' cards GRID -->
+        <!-- Bootstrap grid using rowcols utility to set columns (5) and rows (2) -->
+        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3 mb-4">
+
+            <!-- Card template — Reused for each design manually -->
+            <!-- TO DO: Find way to scale for many design cards (design framework components?) -->
+            <!-- Design 1 -->
+            <div class="col">
+                <div class="design-card h-100">
+                    <img src="Media/image-placeholder.jpg" class="card-img-top" alt="Cable organizer">
+                    <div class="card-body">
+                        <div>
+                            <p class="card-title mb-0">Cable organizer</p>
+                            <p class="card-source">Printables</p>
                         </div>
-                        
+                        <!-- ⚠️ bi-heart / bi-heart-fill are Bootstrap Icons classes -->
+                        <button class="fav-btn" onclick="toggleFav(this)" aria-label="Add to favourites">
+                            <i class="bi bi-heart"></i>
+                        </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Prev / Next controls (useful when more sites are added later) -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#sitesCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#sitesCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+            <!-- Design 2 -->
+            <div class="col">
+                <div class="design-card h-100">
+                    <img src="Media/image-placeholder.jpg" class="card-img-top" alt="Flower pot">
+                    <div class="card-body">
+                        <div>
+                            <p class="card-title mb-0">Flower pot</p>
+                            <p class="card-source">Thingiverse</p>
+                        </div>
+                        <button class="fav-btn" onclick="toggleFav(this)" aria-label="Add to favourites">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Design 3 -->
+            <div class="col">
+                <div class="design-card h-100">
+                    <img src="Media/image-placeholder.jpg" class="card-img-top" alt="Normandy SR2 mini">
+                    <div class="card-body">
+                        <div>
+                            <p class="card-title mb-0">Normandy SR2 mini</p>
+                            <p class="card-source">MyMiniFactory</p>
+                        </div>
+                        <button class="fav-btn active" onclick="toggleFav(this)" aria-label="Remove from favourites">
+                            <i class="bi bi-heart-fill"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Design 4 -->
+            <div class="col">
+                <div class="design-card h-100">
+                    <img src="Media/image-placeholder.jpg" class="card-img-top" alt="Controller stand">
+                    <div class="card-body">
+                        <div>
+                            <p class="card-title mb-0">Controller stand</p>
+                            <p class="card-source">Cults3D</p>
+                        </div>
+                        <button class="fav-btn" onclick="toggleFav(this)" aria-label="Add to favourites">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Design 5 -->
+            <div class="col">
+                <div class="design-card h-100">
+                    <img src="Media/image-placeholder.jpg" class="card-img-top" alt="Wrench holder">
+                    <div class="card-body">
+                        <div>
+                            <p class="card-title mb-0">Wrench holder</p>
+                            <p class="card-source">Printables</p>
+                        </div>
+                        <button class="fav-btn" onclick="toggleFav(this)" aria-label="Add to favourites">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Design 6 -->
+            <div class="col">
+                <div class="design-card h-100">
+                    <img src="Media/image-placeholder.jpg" class="card-img-top" alt="Lamp shade">
+                    <div class="card-body">
+                        <div>
+                            <p class="card-title mb-0">Lamp shade</p>
+                            <p class="card-source">Thingiverse</p>
+                        </div>
+                        <button class="fav-btn" onclick="toggleFav(this)" aria-label="Add to favourites">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Design 7 -->
+            <div class="col">
+                <div class="design-card h-100">
+                    <img src="Media/image-placeholder.jpg" class="card-img-top" alt="Zeratul mini">
+                    <div class="card-body">
+                        <div>
+                            <p class="card-title mb-0">Zeratul mini</p>
+                            <p class="card-source">MyMiniFactory</p>
+                        </div>
+                        <button class="fav-btn" onclick="toggleFav(this)" aria-label="Add to favourites">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Design 8 -->
+            <div class="col">
+                <div class="design-card h-100">
+                    <img src="Media/image-placeholder.jpg" class="card-img-top" alt="Wall hook">
+                    <div class="card-body">
+                        <div>
+                            <p class="card-title mb-0">Wall hook</p>
+                            <p class="card-source">Cults3D</p>
+                        </div>
+                        <button class="fav-btn" onclick="toggleFav(this)" aria-label="Add to favourites">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Design 9 -->
+            <div class="col">
+                <div class="design-card h-100">
+                    <img src="Media/image-placeholder.jpg" class="card-img-top" alt="Raspberry Pi case">
+                    <div class="card-body">
+                        <div>
+                            <p class="card-title mb-0">Raspberry Pi case</p>
+                            <p class="card-source">Printables</p>
+                        </div>
+                        <button class="fav-btn" onclick="toggleFav(this)" aria-label="Add to favourites">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Design 10 -->
+            <div class="col">
+                <div class="design-card h-100">
+                    <img src="Media/image-placeholder.jpg" class="card-img-top" alt="Phone stand">
+                    <div class="card-body">
+                        <div>
+                            <p class="card-title mb-0">Phone stand</p>
+                            <p class="card-source">Thingiverse</p>
+                        </div>
+                        <button class="fav-btn" onclick="toggleFav(this)" aria-label="Add to favourites">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
 
         </div>
-    </div>
+        <!-- End of card GRID -->
 
-    <!-- Footer disclaimer -->
+        <!-- Pagination component (Bootstrap) TO DO: frontend-only for now -->
+        <nav aria-label="Designs pagination">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </nav>
+
+    </main>
+
+    /* ========================== FOOTER ==========================*/
     <footer id="disclaimer">
         <p class="mb-0 text-center">For educational purposes only · Not for commercial use · HUB3D 2026</p>
     </footer>
@@ -171,5 +289,32 @@
     <!-- Bootstrap / JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     
+    /* ========================== FUNCTIONS ==========================*/
+    <!-- Toggle filter indicators colours (on/off) and heart icon (outline / filled) -->
+    <script>
+        
+        function toggleIndicator(id, activeClass) {
+            const el = document.getElementById(id);
+            if (el.classList.contains('ind-off')) {
+                el.classList.remove('ind-off');
+                el.classList.add(activeClass);
+            } else {
+                el.classList.remove(activeClass);
+                el.classList.add('ind-off');
+            }
+        }
+
+        function toggleFav(btn) {
+            const icon = btn.querySelector('i');
+            if (icon.classList.contains('bi-heart')) {
+                icon.classList.replace('bi-heart', 'bi-heart-fill');
+                btn.classList.add('active');
+            } else {
+                icon.classList.replace('bi-heart-fill', 'bi-heart');
+                btn.classList.remove('active');
+            }
+        }
+    </script>
+
 </body>
 </html>

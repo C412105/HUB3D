@@ -177,13 +177,13 @@
     <!-- Bootstrap / JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     
-    /* ========================== POPOVERS (Bootstrap) ==========================*/
-    <!-- Used by data-bs-toggle="popover" -->
+    /* ========================== FUNCTIONS ==========================*/
+    <!-- POPOVER (Bootstrap) - Used by data-bs-toggle="popover" -->
+    <!-- Switch between Log in and Get started -->
     <script>
         const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
         popoverTriggerList.forEach(el => new bootstrap.Popover(el));
 
-        // Switch between Log in and Get started
         function toggleAuthTab(tab) {
             const loginPanel  = document.getElementById('loginPanel');
             const signupPanel = document.getElementById('signupPanel');
