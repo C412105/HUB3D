@@ -3,14 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HUB3D</title>
-    <script src="HUB3dv0.js"></script>
+    <title>HUB3D — Find 3D Prints for Your Setup</title>
+
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
     <link rel="stylesheet" href="HUB3Dvo.css">
+
+    <!-- Deferred JS file for DOM to start after js file/script loaded -->
+    <script src="HUB3dv0.js" defer></script>
 </head>
 <body>
    
-    <!-- NavBar -->
+    /* ========================== NAVBAR ==========================*/
     <nav id="navbar" class="navbar navbar-expand-lg mx-3 my-3">
         <div class="container-fluid">
 
@@ -20,106 +27,149 @@
             <!-- Navigation links — ms-auto aligns them right -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto me-4">
+
+                    <!-- data-bs-toggle="POPOVER" (asks users to first login on hover/focus -->
                     <li class="nav-item">
-                        <a class="nav-link" href="#">My Equipment</a>
+                        <a class="nav-link" href="#"
+                           data-bs-toggle="popover"
+                           data-bs-trigger="hover focus"
+                           data-bs-content="Please log in to access this section."
+                           data-bs-placement="bottom">My Equipment</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Designs</a>
+                        <a class="nav-link" href="#"
+                           data-bs-toggle="popover"
+                           data-bs-trigger="hover focus"
+                           data-bs-content="Please log in to access this section."
+                           data-bs-placement="bottom">Designs</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Profile</a>
+                        <a class="nav-link" href="#"
+                           data-bs-toggle="popover"
+                           data-bs-trigger="hover focus"
+                           data-bs-content="Please log in to access this section."
+                           data-bs-placement="bottom">Profile</a>
                     </li>
+                    <!-- No login required -->
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="contactHUB3Dv0.html">Contact</a>
                     </li>
                 </ul>
             </div>
-
-            <!-- Account buttons — d-flex makes them horizontal, gap-2 separates them -->
-            <div class="d-flex gap-2">
-                <button class="btn btn-sm" type="button">Login</button>
-                <button class="btn btn-sm" type="button">Sign up</button>
-            </div>
-
         </div>
     </nav>
 
-    <!-- Title -->
-    <div id="homeTitle" class="container mb-5 text-center">
-        <h2>Find 3D prints for your setup</h2>
-        <p>Browse thousands of designs from top sites — filtered for your exact printers and filaments.</p>
-    </div>
+    /* ========================== CONTENT ==========================*/
+    <main class="page-content">
+        
+        <!-- Title -->
+        <div id="homeTitle" class="container mb-5 text-center">
+            <h2>Find 3D designs that work with your equipment</h2>
+            <p>Track your printers and filaments, then discover designs that are compatible with your exact setup. No more failed prints or wasted materials.</p>
+        </div>
 
-<!-- Carousel (ID used for controls) -->
-    <div class="container mb-5">
-        <div id="sitesCarousel" class="carousel slide" data-bs-ride="carousel">
+        <!-- Carousel (IDs used for controls, hidden until more sites are added) -->
+        <div class="container mb-5">
+            <div id="sitesCarousel" class="carousel slide" data-bs-ride="carousel">
 
-            <!-- Indicators (4 websites per carousel-item) -->
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="row justify-content-center align-items-center g-3">
-                        <div class="col-3 text-center">
-                            <a href="https://www.myminifactory.com" target="_blank">
-                                <img src="Media/MyMiniFactoryLogo.png" alt="MyMiniFactory" class="img-fluid carousel-logo">
-                            </a>
-                            <p class="mt-2 carousel-caption-text">MyMiniFactory<br><small>Community</small></p>
-                        </div>
-                        <div class="col-3 text-center">
-                            <a href="https://cults3d.com" target="_blank">
-                                <img src="Media/Cults3DLogo.png" alt="Cults3D" class="img-fluid carousel-logo">
-                            </a>
-                            <p class="mt-2 carousel-caption-text">Cults3D<br><small>Free + Paid</small></p>
-                        </div>
-                        <div class="col-3 text-center">
-                            <a href="https://www.thingiverse.com" target="_blank">
-                                <img src="Media/ThingiverseLogo.png" alt="Thingiverse" class="img-fluid carousel-logo">
-                            </a>
-                            <p class="mt-2 carousel-caption-text">Thingiverse<br><small>Free designs</small></p>
-                        </div>
-                        <div class="col-3 text-center">
-                            <a href="https://www.printables.com" target="_blank">
-                                <img src="Media/PrintablesLogo.png" alt="Printables" class="img-fluid carousel-logo">
-                            </a>
-                            <p class="mt-2 carousel-caption-text">Printables<br><small>By Josef Prusa</small></p>
+                <!-- Indicators (4 websites per carousel-item) -->
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row justify-content-center align-items-center g-3">
+                            <div class="col-3 text-center">
+                                <a href="https://www.myminifactory.com" target="_blank">
+                                    <img src="Media/MyMiniFactoryLogo.png" alt="MyMiniFactory" class="img-fluid carousel-logo">
+                                </a>
+                                <p class="mt-2 carousel-caption-text">MyMiniFactory<br><small>Community</small></p>
+                            </div>
+                            <div class="col-3 text-center">
+                                <a href="https://cults3d.com" target="_blank">
+                                    <img src="Media/Cults3DLogo.png" alt="Cults3D" class="img-fluid carousel-logo">
+                                </a>
+                                <p class="mt-2 carousel-caption-text">Cults3D<br><small>Free + Paid</small></p>
+                            </div>
+                            <div class="col-3 text-center">
+                                <a href="https://www.thingiverse.com" target="_blank">
+                                    <img src="Media/ThingiverseLogo.png" alt="Thingiverse" class="img-fluid carousel-logo">
+                                </a>
+                                <p class="mt-2 carousel-caption-text">Thingiverse<br><small>Free designs</small></p>
+                            </div>
+                            <div class="col-3 text-center">
+                                <a href="https://www.printables.com" target="_blank">
+                                    <img src="Media/PrintablesLogo.png" alt="Printables" class="img-fluid carousel-logo">
+                                </a>
+                                <p class="mt-2 carousel-caption-text">Printables<br><small>By Josef Prusa</small></p>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- Prev / Next controls (useful when more sites are added later) -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#sitesCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#sitesCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+
             </div>
-
-            <!-- Prev / Next controls (useful when more sites are added later) -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#sitesCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#sitesCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-
         </div>
-    </div>
 
-    <!-- Placeholder spacing -->
-    <div class="container mb-5 mt-5">
-        <p>a</p>
-    </div>
+        /* ========================== AUTHORIZATION CARD (Login/Signup) ==========================*/
+        <div class="container mb-5">
+            <div id="authCard">
 
-    <div class="container mb-5">
-        <div id="login">
-            <div class="mb-3">
-                <label class="form-label">Email address</label>
-                <input type="email" class="form-control" id="InputEmail1">
-                <div class="form-text">I'll never share your email with anyone or anything.</div>
+                <!-- Tabs switcher -->
+                <div class="auth-tab-row">
+                    <!-- JS function (toggleAuthTab) for buttons to switch between tabs-->
+                    <button class="auth-tab-btn active" id="tabLogin" onclick="toggleAuthTab('login')">Log in</button>
+                    <button class="auth-tab-btn" id="tabSignup" onclick="toggleAuthTab('signup')">Get started</button>
+                </div>
+
+                <!-- Personal info warning banner -->
+                <div class="auth-warning">
+                    ⚠ Do not enter real personal information
+                </div>
+
+                <!-- LOGIN PANEL -->
+                <div id="loginPanel">
+                    <div class="mb-3">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" class="form-control" id="loginEmail" placeholder="your@email.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" class="form-control" id="loginPassword" placeholder="••••••••">
+                    </div>
+                    <button type="button" class="btn-auth">Log in</button>
+                </div>
+
+                <!-- SIGN UP PANEL (hidden by default) -->
+                <!-- CSS style="display:none" to hide the panel initially. Toggled with toggleAuthTab -->
+                 <!-- TO-DO: How to move this style from the tag here (inline) to CSS file -->
+                <div id="signupPanel" style="display:none;">
+                    <div class="mb-3">
+                        <label for="signupEmail">Email</label>
+                        <input type="email" class="form-control" id="signupEmail" placeholder="your@email.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" class="form-control" id="signupPassword" placeholder="••••••••">
+                    </div>
+                    <div class="mb-3">
+                        <!-- Confirm password is needed for data validation (password match requirement) -->
+                        <label for="signupConfirm">Confirm password</label>
+                        <input type="password" class="form-control" id="signupConfirm" placeholder="••••••••">
+                    </div>
+                    <button type="button" class="btn-auth">Create account</button>
+                </div>
+
             </div>
-            <div class="mb-3">
-                <label class="form-label">Password</label>
-                <input type="password" class="form-control" id="InputPassword1">
-            </div>
-            <button type="submit" class="btn btn-primary">Log in</button>
         </div>
-    </div>
 
-    <!-- Footer disclaimer -->
+    /* ========================== FOOTER ==========================*/
     <footer id="disclaimer">
         <p class="mb-0 text-center">For educational purposes only · Not for commercial use · HUB3D 2026</p>
     </footer>
@@ -127,5 +177,32 @@
     <!-- Bootstrap / JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     
+    /* ========================== POPOVERS (Bootstrap) ==========================*/
+    <!-- Used by data-bs-toggle="popover" -->
+    <script>
+        const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+        popoverTriggerList.forEach(el => new bootstrap.Popover(el));
+
+        // Switch between Log in and Get started
+        function toggleAuthTab(tab) {
+            const loginPanel  = document.getElementById('loginPanel');
+            const signupPanel = document.getElementById('signupPanel');
+            const tabLogin    = document.getElementById('tabLogin');
+            const tabSignup   = document.getElementById('tabSignup');
+
+            if (tab === 'login') {
+                loginPanel.style.display  = 'block';
+                signupPanel.style.display = 'none';
+                tabLogin.classList.add('active');
+                tabSignup.classList.remove('active');
+            } else {
+                loginPanel.style.display  = 'none';
+                signupPanel.style.display = 'block';
+                tabSignup.classList.add('active');
+                tabLogin.classList.remove('active');
+            }
+        }
+    </script>
+
 </body>
 </html>
