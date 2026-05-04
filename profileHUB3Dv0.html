@@ -3,54 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile - HUB3D</title>
-    <script src="HUB3dv0.js"></script>
+    <title>Profile — HUB3D</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="HUB3Dvo.css">
+    <script src="HUB3dv0.js" defer></script>
 </head>
 <body>
-   
-    <!-- NavBar -->
+
+    <!-- ========================== NAVBAR ========================== -->
     <nav id="navbar" class="navbar navbar-expand-lg mx-3 my-3">
         <div class="container-fluid">
-
-            <!-- Logo / brand -->
             <h1 class="navbar-brand mb-0">HUB3D</h1>
-
-            <!-- Navigation links — ms-auto aligns them right -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto me-4">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">My Equipment</a>
+                        <a class="nav-link" href="equipmentHUB3Dv0.html">My Equipment</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Designs</a>
+                        <a class="nav-link" href="designsHUB3Dv0.html">Designs</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Profile</a>
+                        <a class="nav-link disabled" aria-disabled="true">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="contactHUB3Dv0.html">Contact</a>
                     </li>
                 </ul>
             </div>
-
-            <!-- Account buttons — d-flex makes them horizontal, gap-2 separates them -->
-            <div class="d-flex gap-2">
-                <button class="btn btn-sm" type="button">Login</button>
-                <button class="btn btn-sm" type="button">Sign up</button>
+            <div class="d-flex align-items-center me-2">
+                <div id="profileAvatar" style="width:38px; height:38px; font-size:1rem;">U</div>
             </div>
-
         </div>
     </nav>
 
-    <!-- Footer disclaimer -->
+    <!-- ========================== CONTENT ========================== -->
+    <main class="page-content container mt-4 mb-5">
+
+        <!-- User info bar -->
+        <div id="profileHeader">
+            <div id="profileAvatar">U</div>
+            <div>
+                <p class="profile-name">User_1234</p>
+                <p class="profile-sub">Member since August 2025 · 2 printers · 2 filaments</p>
+            </div>
+        </div>
+
+        <!-- Printers & Filaments -->
+        <div class="row g-4">
+
+            <!-- Printers -->
+            <div class="col-md-6">
+                <h4 class="mb-3">My printer(s)</h4>
+
+                <div class="profile-list-row">
+                    <div>
+                        <p class="item-label">Ender 3</p>
+                        <p class="item-sub">Creality</p>
+                    </div>
+                    <button class="btn-remove" type="button">Remove</button>
+                </div>
+
+                <div class="profile-list-row">
+                    <div>
+                        <p class="item-label">Prusa MK4</p>
+                        <p class="item-sub">Prusa Research</p>
+                    </div>
+                    <button class="btn-remove" type="button">Remove</button>
+                </div>
+
+                <button class="btn btn-sm mt-2" type="button">+ Add printer</button>
+            </div>
+
+            <!-- Filaments column -->
+            <div class="col-md-6">
+                <h4 class="mb-3">My filament(s)</h4>
+
+                <div class="profile-list-row">
+                    <div>
+                        <p class="item-label">PLA</p>
+                        <p class="item-sub">All brands</p>
+                    </div>
+                    <button class="btn-remove" type="button">Remove</button>
+                </div>
+
+                <div class="profile-list-row">
+                    <div>
+                        <p class="item-label">PETG</p>
+                        <p class="item-sub">All brands</p>
+                    </div>
+                    <button class="btn-remove" type="button">Remove</button>
+                </div>
+
+                <button class="btn btn-sm mt-2" type="button">+ Add filament</button>
+            </div>
+
+        </div>
+        
+        <!-- Logout button -->
+        <div class="d-flex justify-content-end mt-4">
+            <button class="btn-logout" type="button">Logout</button>
+        </div>
+
+    </main>
+
+    <!-- ========================== FOOTER ========================== -->
     <footer id="disclaimer">
-        <p class="mb-0 text-center">For educational purposes only · Not for commercial use · HUB3D 2026</p>
+        <p class="mb-0">For educational purposes only · Not for commercial use · HUB3D 2026</p>
     </footer>
 
-    <!-- Bootstrap / JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    
 </body>
 </html>

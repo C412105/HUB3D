@@ -3,77 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - HUB3D</title>
-    <script src="HUB3dv0.js"></script>
+    <title>Contact — HUB3D</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="HUB3Dvo.css">
+    <script src="HUB3dv0.js" defer></script>
 </head>
 <body>
-   
-    <!-- NavBar -->
+
+    <!-- ========================== NAVBAR ========================== -->
     <nav id="navbar" class="navbar navbar-expand-lg mx-3 my-3">
         <div class="container-fluid">
-
-            <!-- Logo / brand -->
             <h1 class="navbar-brand mb-0">HUB3D</h1>
-
-            <!-- Navigation links — ms-auto aligns them right -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto me-4">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">My Equipment</a>
+                        <a class="nav-link" href="equipmentHUB3Dv0.html">My Equipment</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Designs</a>
+                        <a class="nav-link" href="designsHUB3Dv0.html">Designs</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Profile</a>
+                        <a class="nav-link" href="profileHUB3Dv0.html">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link disabled" aria-disabled="true">Contact</a>
                     </li>
                 </ul>
             </div>
-
-            <!-- Account buttons — d-flex makes them horizontal, gap-2 separates them -->
-            <div class="d-flex gap-2">
-                <button class="btn btn-sm" type="button">Login</button>
-                <button class="btn btn-sm" type="button">Sign up</button>
+            <div class="d-flex align-items-center me-2">
+                <div id="profileAvatar" style="width:38px; height:38px; font-size:1rem;">U</div>
             </div>
-
         </div>
     </nav>
 
-    <!-- Title -->
-    <div id="homeTitle" class="container mb-5 text-center">
-        <h2>Contact me</h2>
-        <p>Got an idea or feedback? Hit me up! I'm always looking to improve the site, try something new, or just open to collab.</p>
-    </div>
+    <!-- ========================== CONTENT ========================== -->
+    <main class="page-content container mt-4 mb-5">
 
-    <div class="container">
-    <h3>Contact form</h3>
-    <form>
-        
-        <label>email: </label>
-        <input type="email" name="Name"><br><br>
+        <!-- Feedback & Contact forms -->
+        <div class="row g-4">
 
-        <label>Email address (optional): </label>
-        <input type="email" name="Email"><br><br>
+            <!-- Feedback -->
+            <div class="col-md-6">
+                <h2 class="mb-2">Feedback</h2>
+                <p class="mb-4">Got an idea? Hit me up! I'm always looking to improve the site, try something new, or just open to collaborate.</p>
 
-        <label>Be honest. What hits, what misses and what would you like to say? </label>
-        <input type="text" name="Mensaje"><br><br>
+                <div class="contact-card">
+                    <h3 class="mb-1">Share your feedback</h3>
+                    <p class="mb-3">Be honest — what hits, what misses, and what do you want more of?</p>
 
-        <button type="submit">Submit</button>
+                    <div class="mb-3">
+                        <textarea class="form-control" id="feedbackMessage"
+                                  rows="4" placeholder="Your feedback..."></textarea>
+                    </div>
 
-    </form>
+                    <button type="button" class="btn-contact-submit">Submit</button>
+                    <p class="contact-privacy-note">Your username won't be shared publicly. Never submit passwords.</p>
+                </div>
+            </div>
 
-    <!-- Footer disclaimer -->
+            <!-- Contact -->
+            <div class="col-md-6">
+                <div class="contact-card">
+                    <h3 class="mb-3">Contact Form</h3>
+
+                    <div class="mb-3">
+                        <label for="contactName">Name or Nickname</label>
+                        <input type="text" class="form-control" id="contactName" placeholder="How should I call you?">
+                    </div>
+
+                    <div class="mb-3">
+                        <!-- Email is optional -->
+                        <label for="contactEmail">Email address <span style="color:#545454;">(optional)</span></label>
+                        <input type="email" class="form-control" id="contactEmail" placeholder="your@email.com">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="contactMessage">Leave a message</label>
+                        <textarea class="form-control" id="contactMessage"
+                                  rows="5" placeholder="Your message..."></textarea>
+                    </div>
+
+                    <button type="button" class="btn-contact-submit">Submit</button>
+                    <p class="contact-privacy-note">Your username won't be shared publicly. Never submit passwords.</p>
+                </div>
+            </div>
+
+        </div><!-- end row -->
+
+    </main>
+
+    <!-- ========================== FOOTER ========================== -->
     <footer id="disclaimer">
-        <p class="mb-0 text-center">For educational purposes only · Not for commercial use · HUB3D 2026</p>
+        <p class="mb-0">For educational purposes only · Not for commercial use · HUB3D 2026</p>
     </footer>
 
-    <!-- Bootstrap / JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    
 </body>
 </html>
