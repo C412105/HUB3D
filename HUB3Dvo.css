@@ -27,6 +27,15 @@ nav#navbar {
     margin: 1rem;
 }
 
+/* Navbar toggle into burger icon */
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255,255,255,0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
 /* Footer's margins to match navbar's */
 footer#disclaimer {
     margin: 0 1rem 1rem 1rem;
@@ -205,6 +214,24 @@ p.carousel-caption-text small {
     color: #5db1ff;
 }
 
+/* Form validation (error highlighting used by JS functions */
+.field-error {
+    color: #ff6b6b;
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+
+/* Override of Bootstrap's .form-control focus */
+input.is-invalid {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.15) !important;
+}
+
+input.is-valid {
+    border-color: #28a745 !important;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.1) !important;
+}
+
 /* ========================== EQUIPMENT PAGE ==========================*/
 /* btn-check for toggleable checkboxes (filtering by setup and favourites) */
 .equipment-group {
@@ -283,7 +310,8 @@ p.carousel-caption-text small {
 /* Off — gray */
 .filter-indicator.ind-off {
     border-color: #545454;
-    color: #545454;
+    color: #aaaaaa;
+    background-color: rgba(84, 84, 84, 0.18);  /* light semi-transparent fill */
 }
 
 /* On — green (My setup only) */
@@ -298,6 +326,24 @@ p.carousel-caption-text small {
     background-color: rgba(0, 71, 137, 0.35);
     border-color: #5db1ff;
     color: #5db1ff;
+}
+
+/* FILTER SELECT DROPDOWNS */
+select.filter-select {
+    background-color: #262624;
+    color: #ffffff;
+    border: 1px solid #545454;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    padding-right: 2.25rem;
+    font-size: 0.88rem;
+}
+
+select.filter-select option {
+    background-color: #262624;
+    color: #ffffff;
 }
 
 /* CARDS */
