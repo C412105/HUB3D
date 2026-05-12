@@ -16,7 +16,9 @@
         <div class="container-fluid">
 
             <!-- Logo / brand -->
-            <h1 class="navbar-brand mb-0">HUB3D</h1>
+            <a href="homeHUB3Dv0.html" class="navbar-brand mb-0">
+                <h1 class="navbar-brand mb-0">HUB3D</h1>
+            </a>
 
             <!-- Hamburger toggle (data-bs-toggle="collapse" Bootstrap JS component) -->
             <button class="navbar-toggler" type="button"
@@ -28,7 +30,16 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <!-- Navigation links — ms-auto aligns them right -->
+            <!-- Navigation links — Collapses into burger, ms-auto aligns them right -->
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto me-4">
                     <li class="nav-item">

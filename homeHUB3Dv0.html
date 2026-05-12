@@ -22,7 +22,9 @@
         <div class="container-fluid">
 
             <!-- Logo / brand -->
-            <h1 class="navbar-brand mb-0">HUB3D</h1>
+            <a href="homeHUB3Dv0.html" class="navbar-brand mb-0">
+                <h1 class="navbar-brand mb-0">HUB3D</h1>
+            </a>
 
             <!-- Hamburger toggle (data-bs-toggle="collapse" Bootstrap JS component) -->
             <button class="navbar-toggler" type="button"
@@ -34,7 +36,16 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <!-- Navigation links — ms-auto aligns them right -->
+            <!-- Navigation links — Collapses into burger, ms-auto aligns them right -->
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto me-4">
 
@@ -153,13 +164,14 @@
                         <label for="loginPassword">Password</label>
                         <input type="password" class="form-control" id="loginPassword" placeholder="••••••••">
                     </div>
-                    <button type="button" class="btn-auth">Log in</button>
+                    <!-- click calls handleLogin() function -->
+                    <button type="button" class="btn-auth" onclick="handleLogin()">Log in</button>
                 </div>
 
                 <!-- SIGN UP PANEL (hidden by default) -->
                 <!-- CSS style="display:none" to hide the panel initially. Toggled with toggleAuthTab -->
                  <!-- TO-DO: How to move this style from the tag here (inline) to CSS file -->
-                <div id="signupPanel" style="display:none;">
+                <div id="signupPanel">
                     <div class="mb-3">
                         <label for="signupEmail">Email</label>
                         <input type="email" class="form-control" id="signupEmail" placeholder="your@email.com">
@@ -173,7 +185,8 @@
                         <label for="signupConfirm">Confirm password</label>
                         <input type="password" class="form-control" id="signupConfirm" placeholder="••••••••">
                     </div>
-                    <button type="button" class="btn-auth">Create account</button>
+                    <!-- click calls handleSignup() function -->
+                    <button type="button" class="btn-auth" onclick="handleSignup()">Create account</button>
                 </div>
 
             </div>
@@ -188,31 +201,152 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     
     <!-- ========================== FUNCTIONS ========================== -->
-    <!-- POPOVER (Bootstrap) - Used by data-bs-toggle="popover" -->
     <!-- Switch between Log in and Get started -->
     <script>
-        const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
-        popoverTriggerList.forEach(el => new bootstrap.Popover(el));
+    // POPOVER (Bootstrap) - Used by data-bs-toggle="popover"
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+    popoverTriggerList.forEach(el => new bootstrap.Popover(el));
 
-        function toggleAuthTab(tab) {
-            const loginPanel  = document.getElementById('loginPanel');
-            const signupPanel = document.getElementById('signupPanel');
-            const tabLogin    = document.getElementById('tabLogin');
-            const tabSignup   = document.getElementById('tabSignup');
 
-            if (tab === 'login') {
-                loginPanel.style.display  = 'block';
-                signupPanel.style.display = 'none';
-                tabLogin.classList.add('active');
-                tabSignup.classList.remove('active');
-            } else {
-                loginPanel.style.display  = 'none';
-                signupPanel.style.display = 'block';
-                tabSignup.classList.add('active');
-                tabLogin.classList.remove('active');
-            }
+    // ========================== Auth tab switcher ==========================
+    // Caching the panels here so every function below can reuse them
+    // without querying the DOM repeatedly.
+    const loginPanel  = document.getElementById('loginPanel');
+    const signupPanel = document.getElementById('signupPanel');
+
+    // Hide the sign-up panel on load
+    signupPanel.style.display = 'none';
+
+    function toggleAuthTab(tab) {
+        const tabLoginBtn  = document.getElementById('tabLogin');
+        const tabSignupBtn = document.getElementById('tabSignup');
+
+        if (tab === 'login') {
+            loginPanel.style.display  = 'block';
+            signupPanel.style.display = 'none';
+            tabLoginBtn.classList.add('active');
+            tabSignupBtn.classList.remove('active');
+        } else {
+            loginPanel.style.display  = 'none';
+            signupPanel.style.display = 'block';
+            tabSignupBtn.classList.add('active');
+            tabLoginBtn.classList.remove('active');
         }
-    </script>
+        // Clear validation errors when switching tabs
+        clearErrors();
+    }
+
+
+    // ========================== Validation helpers ==========================
+    // Check that string matches standard email pattern (regex)
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    // Adds or remove error message below input field(s)
+    function setFieldError(fieldId, message) {
+        const field = document.getElementById(fieldId);
+
+        // Remove existing error for field first
+        const existingError = document.getElementById(fieldId + '-error');
+        if (existingError) existingError.remove();
+
+        if (message) {
+            // Create and inset error message
+            const errorEl = document.createElement('div');
+            errorEl.id = fieldId + '-error';
+            errorEl.className = 'field-error';
+            errorEl.textContent = message;
+            field.parentNode.appendChild(errorEl);
+            field.classList.add('is-invalid');
+            field.classList.remove('is-valid');
+        } else {
+            // No error: mark green 
+            field.classList.remove('is-invalid');
+            field.classList.add('is-valid');
+        }
+    }
+
+    // Removal of validation states
+    function clearErrors() {
+        const allFields = ['loginEmail', 'loginPassword',
+                           'signupEmail', 'signupPassword', 'signupConfirm'];
+        allFields.forEach(id => {
+            const field = document.getElementById(id);
+            field.classList.remove('is-invalid', 'is-valid');
+            const err = document.getElementById(id + '-error');
+            if (err) err.remove();
+        });
+    }
+
+
+    // ========================== Login validation ==========================
+    function handleLogin() {
+        let isValid = true;
+
+        const email    = document.getElementById('loginEmail').value.trim();
+        const password = document.getElementById('loginPassword').value;
+
+        if (!isValidEmail(email)) {
+            setFieldError('loginEmail', 'Please enter a valid email address.');
+            isValid = false;
+        } else {
+            setFieldError('loginEmail', null);
+        }
+
+        // Checks field isn't empty — Password verification on backend
+        if (password.length === 0) {
+            setFieldError('loginPassword', 'Please enter your password.');
+            isValid = false;
+        } else {
+            setFieldError('loginPassword', null);
+        }
+
+        if (isValid) {
+            // TO DO: Replace with backend login call
+            console.log('Login form valid — ready for backend.');
+        }
+    }
+
+
+    // ========================== Sign-up validation ==========================
+    function handleSignup() {
+        let isValid = true;
+
+        const email    = document.getElementById('signupEmail').value.trim();
+        const password = document.getElementById('signupPassword').value;
+        const confirm  = document.getElementById('signupConfirm').value;
+
+        if (!isValidEmail(email)) {
+            setFieldError('signupEmail', 'Please enter a valid email address.');
+            isValid = false;
+        } else {
+            setFieldError('signupEmail', null);
+        }
+
+        // Minimum password length
+        if (password.length < 8) {
+            setFieldError('signupPassword', 'Password must be at least 8 characters.');
+            isValid = false;
+        } else {
+            setFieldError('signupPassword', null);
+        }
+
+        // Password match check
+        if (confirm !== password) {
+            setFieldError('signupConfirm', 'Passwords do not match.');
+            isValid = false;
+        } else if (confirm.length > 0) {
+            setFieldError('signupConfirm', null);
+        }
+
+        if (isValid) {
+            // TO DO: Replace with backend login call
+            console.log('Sign-up form valid — ready for backend.');
+        }
+    }
+</script>
 
 </body>
 </html>

@@ -16,7 +16,9 @@
         <div class="container-fluid">
 
             <!-- Logo / brand -->
-            <h1 class="navbar-brand mb-0">HUB3D</h1>
+            <a href="homeHUB3Dv0.html" class="navbar-brand mb-0">
+                <h1 class="navbar-brand mb-0">HUB3D</h1>
+            </a>
 
             <!-- Hamburger toggle (data-bs-toggle="collapse" Bootstrap JS component) -->
             <button class="navbar-toggler" type="button"
@@ -28,7 +30,16 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <!-- Navigation links — ms-auto aligns them right -->
+            <!-- Navigation links — Collapses into burger, ms-auto aligns them right -->
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto me-4">
                     <li class="nav-item">
@@ -57,61 +68,84 @@
     <!-- ========================== CONTENT ========================== -->
     <main class="page-content container mt-4 mb-5">
 
-        <!-- Search bar -->
-        <div id="searchSection" class="mb-3">
-            <div class="d-flex gap-3 align-items-center flex-wrap">
+    <!-- FILTERS -->
+    <div class="row g-2 align-items-start mb-3">
+        <!-- LEFT: search bar + button -->
+        <div class="col-12 col-md-6">
+            <div class="d-flex gap-2">
                 <input type="text" id="searchInput" class="form-control"
-                       placeholder="Search designs..." aria-label="Search designs">
-                <select id="ratingFilter" class="form-select" aria-label="Filter by rating">
+                    placeholder="Search designs..."
+                    aria-label="Search designs"
+                    style="background:#262624; color:#fff; border-color:#545454;">
+                <button class="btn btn-sm flex-shrink-0" type="button">Search</button>
+            </div>
+        </div>
+
+        <!-- RIGHT: filter dropdowns -->
+        <div class="col-12 col-md-6">
+            <div class="d-flex gap-2 flex-wrap">
+
+                <!-- Rating -->
+                <select id="ratingFilter" class="form-select filter-select" aria-label="Filter by rating">
                     <option value="">All ratings</option>
                     <option value="5">★★★★★ 5 stars</option>
                     <option value="4">★★★★☆ 4+ stars</option>
                     <option value="3">★★★☆☆ 3+ stars</option>
                 </select>
-                <button class="btn btn-sm" type="button">Search</button>
+
+                <!-- Printer -->
+                <select id="printerFilter" class="form-select filter-select" aria-label="Filter by printer">
+                    <option value="">All printers</option>
+                    <option value="ender3">Ender 3</option>
+                    <option value="ender3pro">Ender 3 Pro</option>
+                    <option value="prusaMK4">Prusa MK4</option>
+                    <option value="bambuX1">Bambu Lab X1</option>
+                    <option value="bambuP1S">Bambu Lab P1S</option>
+                    <option value="kobra">Anycubic Kobra</option>
+                    <option value="voron">Voron 2.4</option>
+                    <option value="artillery">Artillery Sidewinder</option>
+                </select>
+
+                <!-- Filament -->
+                <select id="filamentFilter" class="form-select filter-select" aria-label="Filter by filament">
+                    <option value="">All filaments</option>
+                    <option value="pla">PLA</option>
+                    <option value="petg">PETG</option>
+                    <option value="abs">ABS</option>
+                    <option value="tpu">TPU</option>
+                    <option value="asa">ASA</option>
+                    <option value="nylon">Nylon</option>
+                    <option value="hips">HIPS</option>
+                    <option value="resin">Resin</option>
+                </select>
+
+                <!-- Source -->
+                <select id="sourceFilter" class="form-select filter-select" aria-label="Filter by source">
+                    <option value="">All sources</option>
+                    <option value="thingiverse">Thingiverse</option>
+                    <option value="printables">Printables</option>
+                    <option value="myminifactory">MyMiniFactory</option>
+                    <option value="cults3d">Cults3D</option>
+                </select>
+
             </div>
         </div>
+    </div>
 
-        <!-- Filter dropdowns (in a row) -->
-        <!-- TO DO: Add all options here as hidden, to be made visible on backend by user selection/setup -->
-        <div class="d-flex gap-3 align-items-center flex-wrap mb-3">
-            <span class="text-white">Filter by</span>
-            <select class="form-select" style="max-width:160px; background:#262624; color:#fff; border-color:#545454;">
-                <option>All printers</option>
-                <option>Ender 3</option>
-                <option>Prusa MK4</option>
-            </select>
-            <select class="form-select" style="max-width:160px; background:#262624; color:#fff; border-color:#545454;">
-                <option>All filaments</option>
-                <option>PLA</option>
-                <option>PETG</option>
-            </select>
-            <select class="form-select" style="max-width:180px; background:#262624; color:#fff; border-color:#545454;">
-                <option>All sources</option>
-                <option>Thingiverse</option>
-                <option>Printables</option>
-                <option>MyMiniFactory</option>
-                <option>Cults3D</option>
-            </select>
-        </div>
+    <!-- Filter indicator pills -->
+    <div class="d-flex gap-3 mb-4">
+        <button class="filter-indicator ind-off" id="indSetup"
+                onclick="toggleIndicator('indSetup', 'ind-green')">
+            ✓ My setup only
+        </button>
+        <button class="filter-indicator ind-off" id="indFavs"
+                onclick="toggleIndicator('indFavs', 'ind-blue')">
+            ♡ Favourites
+        </button>
+    </div>
 
-        <!-- Pills for "My setup only" and "Favourites" filters. Click calls functions to toggle state -->
-        <!-- TO DO: Backend filter logic -->
-        <div class="d-flex gap-3 mb-4">
-            <button class="filter-indicator ind-off" id="indSetup"
-                    onclick="toggleIndicator('indSetup', 'ind-green')">
-                ✓ My setup only
-            </button>
-            <button class="filter-indicator ind-off" id="indFavs"
-                    onclick="toggleIndicator('indFavs', 'ind-blue')">
-                ♡ Favourites
-            </button>
-        </div>
-
-        <!-- Designs' cards GRID -->
-        <!-- Bootstrap grid using rowcols utility to set columns (5) and rows (2) -->
-        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3 mb-4">
-
+        <!-- Designs' cards GRID - responsive to screen size -->
+        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xl-5 g-3 mb-4">
             <!-- Card template — Reused for each design manually -->
             <!-- TO DO: Find way to scale for many design cards (design framework components?) -->
             <!-- Design 1 -->
@@ -275,8 +309,84 @@
                 </div>
             </div>
 
+            <!-- Row 3 — 5 additional placeholder cards (for responsiveness) -->
+            <div class="col">
+                <div class="design-card h-100">
+                    <img src="Media/image-placeholder.jpg" class="card-img-top" alt="Vacuum container part">
+                    <div class="card-body">
+                        <div>
+                            <p class="card-title mb-0">Vacuum container part</p>
+                            <p class="card-source">MyMiniFactory</p>
+                        </div>
+                        <button class="fav-btn" onclick="toggleFav(this)" aria-label="Add to favourites">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="design-card h-100">
+                    <img src="Media/image-placeholder.jpg" class="card-img-top" alt="Door stopper">
+                    <div class="card-body">
+                        <div>
+                            <p class="card-title mb-0">Door stopper</p>
+                            <p class="card-source">Cults3D</p>
+                        </div>
+                        <button class="fav-btn" onclick="toggleFav(this)" aria-label="Add to favourites">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="design-card h-100">
+                    <img src="Media/image-placeholder.jpg" class="card-img-top" alt="Filament spool holder">
+                    <div class="card-body">
+                        <div>
+                            <p class="card-title mb-0">Filament spool holder</p>
+                            <p class="card-source">Printables</p>
+                        </div>
+                        <button class="fav-btn" onclick="toggleFav(this)" aria-label="Add to favourites">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="design-card h-100">
+                    <img src="Media/image-placeholder.jpg" class="card-img-top" alt="Mini planter">
+                    <div class="card-body">
+                        <div>
+                            <p class="card-title mb-0">Mini planter</p>
+                            <p class="card-source">Thingiverse</p>
+                        </div>
+                        <button class="fav-btn" onclick="toggleFav(this)" aria-label="Add to favourites">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="design-card h-100">
+                    <img src="Media/image-placeholder.jpg" class="card-img-top" alt="Headphone hook">
+                    <div class="card-body">
+                        <div>
+                            <p class="card-title mb-0">Headphone hook</p>
+                            <p class="card-source">MyMiniFactory</p>
+                        </div>
+                        <button class="fav-btn" onclick="toggleFav(this)" aria-label="Add to favourites">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
         </div>
-        <!-- End of card GRID -->
+        <!-- end card grid -->
 
         <!-- Pagination component (Bootstrap) TO DO: frontend-only for now -->
         <nav aria-label="Designs pagination">
