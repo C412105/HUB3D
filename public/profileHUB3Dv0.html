@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile — HUB3D</title>
+    <meta name="description" content="Manage your 3D printer setup and filaments, and view your saved designs.">
+    <title>HUB3D — Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="HUB3Dvo.css">
@@ -65,21 +66,8 @@
             <div class="col-lg-6">
                 <h4 class="mb-3">My printer(s)</h4>
 
-                <div class="profile-list-row">
-                    <div>
-                        <p class="item-label">Ender 3</p>
-                        <p class="item-sub">Creality</p>
-                    </div>
-                    <button class="btn-remove" type="button">Remove</button>
-                </div>
-
-                <div class="profile-list-row">
-                    <div>
-                        <p class="item-label">Prusa MK4</p>
-                        <p class="item-sub">Prusa Research</p>
-                    </div>
-                    <button class="btn-remove" type="button">Remove</button>
-                </div>
+                <!-- Printer cards loaded dynamically from user_printers table (backend) -->
+                <div id="userPrintersList"></div>
 
                 <!-- Toggleable (printer checkbox panel collapse control) -->
                 <button class="btn btn-sm mt-2"
@@ -130,21 +118,8 @@
             <div class="col-lg-6">
                 <h4 class="mb-3">My filament(s)</h4>
 
-                <div class="profile-list-row">
-                    <div>
-                        <p class="item-label">PLA</p>
-                        <p class="item-sub">All brands</p>
-                    </div>
-                    <button class="btn-remove" type="button">Remove</button>
-                </div>
-
-                <div class="profile-list-row">
-                    <div>
-                        <p class="item-label">PETG</p>
-                        <p class="item-sub">All brands</p>
-                    </div>
-                    <button class="btn-remove" type="button">Remove</button>
-                </div>
+                <!-- Filament cards loaded dynamically from user_filaments table (backend) -->
+                <div id="userFilamentsList"></div>
 
                 <!-- Toggleable (filament checkbox panel collapse control) -->
                 <button class="btn btn-sm mt-2"

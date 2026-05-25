@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact — HUB3D</title>
+    <meta name="description" content="Learn about HUB3D, browse FAQs, and send us feedback.">
+    <title>HUB3D — Contact</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="HUB3Dvo.css">
@@ -14,9 +15,13 @@
     <!-- ========================== NAVBAR ========================== -->
     <nav id="navbar" class="navbar navbar-expand-lg mx-3 my-3">
         <div class="container-fluid">
+
+            <!-- Logo / brand -->
             <a href="homeHUB3Dv0.html" class="navbar-brand mb-0">
                 <h1 class="navbar-brand mb-0">HUB3D</h1>
             </a>
+
+            <!-- Hamburger toggle -->
             <button class="navbar-toggler" type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#navbarNav"
@@ -25,14 +30,8 @@
                     aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <button class="navbar-toggler" type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarNav"
-                    aria-controls="navbarNav"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+
+            <!-- Navigation links -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto me-4">
                     <li class="nav-item">
@@ -46,6 +45,8 @@
                     </li>
                 </ul>
             </div>
+
+            <!-- Avatar indicator -->
             <div class="d-flex align-items-center me-2">
                 <div id="profileAvatar" style="width:38px; height:38px; font-size:1rem;">U</div>
             </div>
@@ -55,56 +56,121 @@
     <!-- ========================== CONTENT ========================== -->
     <main class="page-content container mt-4 mb-5">
 
-        <!-- Feedback & Contact forms -->
-        <div class="row g-4">
+        <!-- ========================== FEEDBACK ========================== -->
+        <section class="mb-5">
+            <h2 class="mb-2">Feedback</h2>
+            <p class="mb-4">Got an idea or found something broken? Let us know — I'm always looking to improve.</p>
 
-            <!-- Feedback -->
-            <div class="col-md-6">
-                <h2 class="mb-2">Feedback</h2>
-                <p class="mb-4">Got an idea? Hit me up! I'm always looking to improve the site, try something new, or just open to collaborate.</p>
+            <div class="contact-card">
+                <h3 class="mb-1">Share your feedback</h3>
+                <p class="mb-3">Be honest — what hits, what misses, and what do you want more of?</p>
 
-                <div class="contact-card">
-                    <h3 class="mb-1">Share your feedback</h3>
-                    <p class="mb-3">Be honest — what hits, what misses, and what do you want more of?</p>
-
-                    <div class="mb-3">
-                        <textarea class="form-control" id="feedbackMessage"
-                                  rows="4" placeholder="Your feedback..."></textarea>
-                    </div>
-
-                    <button type="button" class="btn-contact-submit">Submit</button>
-                    <p class="contact-privacy-note">Your username won't be shared publicly. Never submit passwords.</p>
+                <div class="mb-3">
+                    <textarea class="form-control" id="feedbackMessage"
+                              rows="4" placeholder="Your feedback..."></textarea>
                 </div>
+
+                <!-- TO DO: Wire to POST /api/feedback -->
+                <button type="button" class="btn-contact-submit" onclick="submitFeedback()">Submit</button>
+                <p class="contact-privacy-note">Anonymous — no account information is attached to feedback. <strong>Never submit personal information</strong>.</p>
             </div>
+        </section>
 
-            <!-- Contact -->
-            <div class="col-md-6">
-                <div class="contact-card">
-                    <h3 class="mb-3">Contact Form</h3>
+        <!-- ========================== ABOUT ========================== -->
+        <section class="mb-5">
+            <h2 class="mb-3">About HUB3D</h2>
+            <p>HUB3D is a 3D printing design aggregator built to solve a simple problem: finding designs that actually work with your printer and materials. Instead of browsing four different sites and guessing whether a design is compatible with your setup, HUB3D lets you register your printers and filaments once and then filters results across MyMiniFactory, Cults3D, Thingiverse, and Printables automatically.</p>
+            <p>This project was built as a university final project, using Node.js, Express, Supabase, and Bootstrap.</p>
+        </section>
 
-                    <div class="mb-3">
-                        <label for="contactName">Name or Nickname</label>
-                        <input type="text" class="form-control" id="contactName" placeholder="How should I call you?">
+        <!-- ========================== SOURCES ========================== -->
+        <section class="mb-5">
+            <h2 class="mb-3">Our sources</h2>
+            <p class="mb-4">HUB3D aggregates designs from the platforms shown in the home page (clicking my logo takes you back, and their logos take you to their websites).</p>
+            <div class="row g-3">
+            </div>
+        </section>
+
+        <!-- ========================== FAQ ========================== -->
+        <section class="mb-5">
+            <h2 class="mb-3">FAQ</h2>
+
+            <!-- Bootstrap Accordion for clean expand/collapse -->
+            <div class="accordion" id="faqAccordion">
+
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#faq1"
+                                aria-expanded="false" aria-controls="faq1">
+                            Do I need an account to browse designs?
+                        </button>
+                    </h3>
+                    <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Yes — an account is required to use HUB3D. This lets me save your printer and filament setup so I can filter designs for you automatically. Registration is quick and requires only an email and password.
+                        </div>
                     </div>
-
-                    <div class="mb-3">
-                        <!-- Email is optional -->
-                        <label for="contactEmail">Email address <span style="color:#545454;">(optional)</span></label>
-                        <input type="email" class="form-control" id="contactEmail" placeholder="your@email.com">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="contactMessage">Leave a message</label>
-                        <textarea class="form-control" id="contactMessage"
-                                  rows="5" placeholder="Your message..."></textarea>
-                    </div>
-
-                    <button type="button" class="btn-contact-submit">Submit</button>
-                    <p class="contact-privacy-note">Your username won't be shared publicly. Never submit passwords.</p>
                 </div>
-            </div>
 
-        </div><!-- end row -->
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#faq2"
+                                aria-expanded="false" aria-controls="faq2">
+                            How does compatibility filtering work?
+                        </button>
+                    </h3>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Add your printers and filaments from the Profile page. When you enable <strong>My Setup Only</strong> on the Designs page, HUB3D filters results to only show designs that are compatible with your registered equipment.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#faq3"
+                                aria-expanded="false" aria-controls="faq3">
+                            Where do the designs come from?
+                        </button>
+                    </h3>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Designs are fetched from MyMiniFactory and Cults3D via their public APIs. Thingiverse and Printables designs are served from a curated static dataset. HUB3D does not host any design files — clicking a card takes you directly to the original source.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#faq4"
+                                aria-expanded="false" aria-controls="faq4">
+                            Is HUB3D free?
+                        </button>
+                    </h3>
+                    <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Yes, HUB3D is completely free. This is a university project built for educational purposes and is not intended for commercial use.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================== CREDITS ========================== -->
+        <section class="mb-5">
+            <h2 class="mb-3">Credit</h2>
+            <p>Built thanks to what I learned in the UPBTEC program from my professors at <strong>Universidad Pontificia Bolivariana</strong>, Medellín — 2026.</p>
+            <p>
+                <a href="https://github.com/C412105/HUB3D" target="_blank">
+                    <i class="bi bi-github me-1"></i>View on GitHub
+                </a>
+            </p>
+        </section>
 
     </main>
 
@@ -114,5 +180,21 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+    <!-- ========================== FUNCTIONS ========================== -->
+    <script>
+        // Submit feedback — TO DO: replace with fetch('/api/feedback') call
+        function submitFeedback() {
+            const message = document.getElementById('feedbackMessage').value.trim();
+            if (message.length < 5) {
+                alert('Please enter a message before submitting.');
+                return;
+            }
+            // Placeholder confirmation until backend is wired
+            alert('Thank you for your feedback!');
+            document.getElementById('feedbackMessage').value = '';
+        }
+    </script>
+
 </body>
 </html>

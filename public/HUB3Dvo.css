@@ -232,7 +232,12 @@ input.is-valid {
     box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.1) !important;
 }
 
-/* ========================== EQUIPMENT PAGE ==========================*/
+/* removed inline CSSS to set style here */
+#signupPanel {
+    display: none;
+}
+
+/* ========================== EQUIPMENT (DESIGNS PAGE) ==========================*/
 /* btn-check for toggleable checkboxes (filtering by setup and favourites) */
 .equipment-group {
     display: flex;
@@ -346,6 +351,10 @@ select.filter-select option {
     color: #ffffff;
 }
 
+.filter-dropdown::after {
+    content: " ▾";
+}
+
 /* CARDS */
 .design-card {
     background-color: rgba(38, 38, 36, 0.88);
@@ -420,6 +429,11 @@ select.filter-select option {
     background-color: #004789;
     border-color: #5db1ff;
     color: #ffffff;
+}
+
+/* Semi-transparent background when pill is untoggled */
+.pill-filter:not(.active) {
+    background: rgba(255,255,255,0.08);
 }
 
 /* ========================== PROFILE PAGE ==========================*/
