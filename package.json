@@ -11,7 +11,9 @@
   "description": "A hub meant for anyone to find 3D printing designs and filter them based on whether they can be printed using a preset printer and filament setup, which is saved on a profile. This my first website, which I've used to learn basic HTML, CSS, JS, Bootstrap",
   "main": "HUB3dv0.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start":      "node server.js",
+    "import-mmf": "node scripts/importMMF.js",
+    "test":       "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",

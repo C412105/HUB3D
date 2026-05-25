@@ -140,6 +140,14 @@
             document.getElementById("profileAvatar").textContent = username.charAt(0).toUpperCase();
             document.querySelector(".profile-name").textContent  = username;
 
+            // Format joined date (stored as ISO string from Supabase)
+            const joinedRaw = sessionStorage.getItem("hub3d_joined");
+            const joinedStr = joinedRaw
+                ? new Date(joinedRaw).toLocaleDateString("en-US", { month: "long", year: "numeric" })
+                : "Unknown";
+            // Store for use in loadUserEquipment stats bar
+            window._joinedStr = joinedStr;
+
             loadUserEquipment();
         });
 
@@ -186,8 +194,9 @@
             `).join("");
 
             // Stats bar
+            const joined = window._joinedStr || "...";
             document.querySelector(".profile-sub").textContent =
-                `Member since ... · ${(printerRows || []).length} printer(s) · ${(filamentRows || []).length} filament(s)`;
+                `Member since ${joined} · ${(printerRows || []).length} printer(s) · ${(filamentRows || []).length} filament(s)`;
         }
 
         // ── Remove a printer ─────────────────────────────────────────────────

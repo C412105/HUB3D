@@ -321,8 +321,9 @@
                         return;
                     }
                     // Save session to sessionStorage
-                    sessionStorage.setItem("hub3d_user_id", data.userId);
+                    sessionStorage.setItem("hub3d_user_id",  data.userId);
                     sessionStorage.setItem("hub3d_username", data.username);
+                    sessionStorage.setItem("hub3d_joined",   data.joinedAt || "");
                     // Redirect to designs page
                     window.location.href = "designsHUB3Dv0.html";
                 } catch (err) {

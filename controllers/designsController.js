@@ -1,21 +1,24 @@
 const supabase = require("../db/supabaseClient");
 
 // ── GET /api/designs ────────────────────────────────────────
-// Optional query params: ?source=1&q=keyword
+// Optional query params: ?source=1&q=keyword&page=1
 exports.getDesigns = async (req, res) => {
-    const { source, q } = req.query;
+    const { source, q, page = 1 } = req.query;
+    const limit  = 20;
+    const offset = (parseInt(page) - 1) * limit;
 
-    let query = supabase.from("designs").select("*");
+    let query = supabase
+        .from("designs")
+        .select("*", { count: "exact" })
+        .order("fetched_at", { ascending: false });
 
-    // Filter by source if provided
-    if (source) query = query.eq("source_id", source);
+    if (source) query = query.eq("source_id", parseInt(source));
+    if (q)      query = query.ilike("title", `%${q}%`);
 
-    // Keyword search on title
-    if (q) query = query.ilike("title", `%${q}%`);
-
-    const { data, error } = await query.limit(50);
+    const { data, count, error } = await query.range(offset, offset + limit - 1);
     if (error) return res.status(500).json({ error: error.message });
-    res.json(data);
+
+    res.json({ designs: data, total: count, page: parseInt(page), limit });
 };
 
 // ── GET /api/designs/my-setup ───────────────────────────────
