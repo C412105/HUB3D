@@ -10,6 +10,11 @@ app.use(cors());                        // allow frontend calls
 app.use(express.json());                // parse JSON request bodies
 app.use(express.static("public"));      // serve HTML/CSS/JS files
 
+// Redirect root → homepage
+app.get("/", (req, res) => {
+  res.redirect("/homeHUB3Dv0.html");
+});
+
 // ── Routes ─────────────────────────────────────────
 app.use("/api/users",     require("./routes/users"));
 // app.use("/api/designs",   require("./routes/designs"));
