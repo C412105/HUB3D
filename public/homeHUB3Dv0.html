@@ -42,20 +42,27 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto me-4">
 
-                    <!-- data-bs-toggle="POPOVER" (asks users to first login on hover/focus -->
-                    <li class="nav-item">
+                    <!-- Logged-out: popovers block access -->
+                    <li class="nav-item hide-if-logged-in">
                         <a class="nav-link" href="#"
                            data-bs-toggle="popover"
                            data-bs-trigger="hover"
                            data-bs-content="Please log in to access this section."
                            data-bs-placement="bottom">Designs</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item hide-if-logged-in">
                         <a class="nav-link" href="#"
                            data-bs-toggle="popover"
                            data-bs-trigger="hover"
                            data-bs-content="Please log in to access this section."
                            data-bs-placement="bottom">Profile</a>
+                    </li>
+                    <!-- Logged-in: real links (hidden until applyAuthState runs) -->
+                    <li class="nav-item show-if-logged-in" style="display:none">
+                        <a class="nav-link" href="designsHUB3Dv0.html">Designs</a>
+                    </li>
+                    <li class="nav-item show-if-logged-in" style="display:none">
+                        <a class="nav-link" href="profileHUB3Dv0.html">Profile</a>
                     </li>
                     <!-- No login required -->
                     <li class="nav-item">
@@ -125,7 +132,8 @@
         </div>
 
         <!-- ========================== AUTHORIZATION CARD (Login/Signup) ========================== -->
-        <div class="container mb-5">
+        <!-- hide-if-logged-in: card disappears once user is authenticated -->
+        <div class="container mb-5 hide-if-logged-in">
             <div id="authCard">
 
                 <!-- Tabs switcher -->
@@ -275,7 +283,7 @@
 
 
     // ========================== Login validation ==========================
-    function handleLogin() {
+    async function handleLogin() {
         let isValid = true;
 
         const email    = document.getElementById('loginEmail').value.trim();
@@ -296,15 +304,30 @@
             setFieldError('loginPassword', null);
         }
 
-        if (isValid) {
-            // TO DO: Replace with backend login call
-            console.log('Login form valid — ready for backend.');
+        if (!isValid) return;
+
+        try {
+            const res  = await fetch('/api/users/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+            const data = await res.json();
+            if (!res.ok) {
+                setFieldError('loginPassword', data.error || 'Login failed.');
+                return;
+            }
+            sessionStorage.setItem('hub3d_user_id',  data.user.id);
+            sessionStorage.setItem('hub3d_username', data.user.email);
+            window.location.href = 'designsHUB3Dv0.html';
+        } catch {
+            setFieldError('loginPassword', 'Connection error. Please try again.');
         }
     }
 
 
     // ========================== Sign-up validation ==========================
-    function handleSignup() {
+    async function handleSignup() {
         let isValid = true;
 
         const email    = document.getElementById('signupEmail').value.trim();
@@ -334,9 +357,36 @@
             setFieldError('signupConfirm', null);
         }
 
-        if (isValid) {
-            // TO DO: Replace with backend login call
-            console.log('Sign-up form valid — ready for backend.');
+        if (!isValid) return;
+
+        try {
+            const username = email.split('@')[0];
+            const res  = await fetch('/api/users/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, username, password })
+            });
+            const data = await res.json();
+            if (!res.ok) {
+                setFieldError('signupEmail', data.error || 'Registration failed.');
+                return;
+            }
+            // Auto-login after registration
+            const loginRes  = await fetch('/api/users/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+            const loginData = await loginRes.json();
+            if (loginRes.ok) {
+                sessionStorage.setItem('hub3d_user_id',  loginData.user.id);
+                sessionStorage.setItem('hub3d_username', loginData.user.email);
+                window.location.href = 'designsHUB3Dv0.html';
+            } else {
+                toggleAuthTab('login');
+            }
+        } catch {
+            setFieldError('signupEmail', 'Connection error. Please try again.');
         }
     }
 </script>

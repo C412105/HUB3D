@@ -80,38 +80,15 @@
                 </button>
             
 
-            <!-- TO DO: Backend reads .active on labels to know which printers are selected -->
+            <!-- Populated dynamically from GET /api/equipment/printers on collapse open -->
             <div class="collapse mt-3" id="printerCollapse">
-                    <div class="equipment-group mb-3" role="group" aria-label="Printer selection">
-                        <input type="checkbox" class="btn-check" id="printer-ender3" autocomplete="off">
-                        <label class="btn" for="printer-ender3">Ender 3</label>
-
-                        <input type="checkbox" class="btn-check" id="printer-ender3pro" autocomplete="off">
-                        <label class="btn" for="printer-ender3pro">Ender 3 Pro</label>
-
-                        <input type="checkbox" class="btn-check" id="printer-prusaMK4" autocomplete="off">
-                        <label class="btn" for="printer-prusaMK4">Prusa MK4</label>
-
-                        <input type="checkbox" class="btn-check" id="printer-bambuX1" autocomplete="off">
-                        <label class="btn" for="printer-bambuX1">Bambu Lab X1</label>
-
-                        <input type="checkbox" class="btn-check" id="printer-bambuP1S" autocomplete="off">
-                        <label class="btn" for="printer-bambuP1S">Bambu Lab P1S</label>
-
-                        <input type="checkbox" class="btn-check" id="printer-kobra" autocomplete="off">
-                        <label class="btn" for="printer-kobra">Anycubic Kobra</label>
-
-                        <input type="checkbox" class="btn-check" id="printer-voron" autocomplete="off">
-                        <label class="btn" for="printer-voron">Voron 2.4</label>
-
-                        <input type="checkbox" class="btn-check" id="printer-artillery" autocomplete="off">
-                        <label class="btn" for="printer-artillery">Artillery Sidewinder</label>
-                    </div>
-                    <div class="equipment-actions">
-                        <!-- <button class="btn btn-sm" type="button">Reset</button> -->
-                        <button class="btn btn-sm" type="button">Save</button>
-                    </div>
+                <div class="equipment-group mb-3" role="group" aria-label="Printer selection">
+                    <!-- checkboxes injected by JS -->
                 </div>
+                <div class="equipment-actions">
+                    <button class="btn btn-sm" type="button" onclick="savePrinters()">Save</button>
+                </div>
+            </div>
             </div>
 
             <!-- Filaments column -->
@@ -131,36 +108,13 @@
                     + Add filament
                 </button>
 
-                <!-- TO DO: Backend reads .active on labels to know which filaments are selected -->
+                <!-- Populated dynamically from GET /api/equipment/filaments on collapse open -->
                 <div class="collapse mt-3" id="filamentCollapse">
                     <div class="equipment-group mb-3" role="group" aria-label="Filament selection">
-                        <input type="checkbox" class="btn-check" id="fil-pla" autocomplete="off">
-                        <label class="btn" for="fil-pla">PLA</label>
-
-                        <input type="checkbox" class="btn-check" id="fil-petg" autocomplete="off">
-                        <label class="btn" for="fil-petg">PETG</label>
-
-                        <input type="checkbox" class="btn-check" id="fil-abs" autocomplete="off">
-                        <label class="btn" for="fil-abs">ABS</label>
-
-                        <input type="checkbox" class="btn-check" id="fil-tpu" autocomplete="off">
-                        <label class="btn" for="fil-tpu">TPU</label>
-
-                        <input type="checkbox" class="btn-check" id="fil-asa" autocomplete="off">
-                        <label class="btn" for="fil-asa">ASA</label>
-
-                        <input type="checkbox" class="btn-check" id="fil-nylon" autocomplete="off">
-                        <label class="btn" for="fil-nylon">Nylon</label>
-
-                        <input type="checkbox" class="btn-check" id="fil-hips" autocomplete="off">
-                        <label class="btn" for="fil-hips">HIPS</label>
-
-                        <input type="checkbox" class="btn-check" id="fil-resin" autocomplete="off">
-                        <label class="btn" for="fil-resin">Resin</label>
+                        <!-- checkboxes injected by JS -->
                     </div>
                     <div class="equipment-actions">
-                        <!-- <button class="btn btn-sm" type="button">Reset</button> -->
-                        <button class="btn btn-sm" type="button">Save</button>
+                        <button class="btn btn-sm" type="button" onclick="saveFilaments()">Save</button>
                     </div>
                 </div>
             </div>
@@ -175,5 +129,143 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+    <!-- ========================== PROFILE FUNCTIONS ========================== -->
+    <script>
+
+        // ── On load: redirect if not logged in, populate header ─────────────
+        document.addEventListener("DOMContentLoaded", () => {
+            const userId   = sessionStorage.getItem("hub3d_user_id");
+            const username = sessionStorage.getItem("hub3d_username") || "User";
+            if (!userId) { window.location.href = "homeHUB3Dv0.html"; return; }
+
+            // Avatar letter + display name from session
+            document.getElementById("profileAvatar").textContent = username.charAt(0).toUpperCase();
+            document.querySelector(".profile-name").textContent  = username;
+
+            loadUserEquipment();
+        });
+
+        // ── Logout ──────────────────────────────────────────────────────────
+        document.querySelector(".btn-logout").addEventListener("click", () => {
+            sessionStorage.removeItem("hub3d_user_id");
+            sessionStorage.removeItem("hub3d_username");
+            window.location.href = "homeHUB3Dv0.html";
+        });
+
+        // ── Load user's printers and filaments ───────────────────────────────
+        async function loadUserEquipment() {
+            const userId = sessionStorage.getItem("hub3d_user_id");
+            if (!userId) return;
+
+            // Printers
+            const printerRows = await fetch("/api/equipment/user-printers",
+                { headers: { "x-user-id": userId } }).then(r => r.json());
+
+            const printersList = document.getElementById("userPrintersList");
+            printersList.innerHTML = (printerRows || []).map(p => `
+                <div class="profile-list-row" id="printer-row-${p.printer_id}">
+                    <div>
+                        <p class="item-label">${p.model}</p>
+                        <p class="item-sub">${p.brand}</p>
+                    </div>
+                    <button class="btn-remove" onclick="removePrinter(${p.printer_id})">Remove</button>
+                </div>
+            `).join("");
+
+            // Filaments
+            const filamentRows = await fetch("/api/equipment/user-filaments",
+                { headers: { "x-user-id": userId } }).then(r => r.json());
+
+            const filamentsList = document.getElementById("userFilamentsList");
+            filamentsList.innerHTML = (filamentRows || []).map(f => `
+                <div class="profile-list-row" id="filament-row-${f.filament_id}">
+                    <div>
+                        <p class="item-label">${f.type}</p>
+                        <p class="item-sub">All brands</p>
+                    </div>
+                    <button class="btn-remove" onclick="removeFilament(${f.filament_id})">Remove</button>
+                </div>
+            `).join("");
+
+            // Stats bar
+            document.querySelector(".profile-sub").textContent =
+                `Member since ... · ${(printerRows || []).length} printer(s) · ${(filamentRows || []).length} filament(s)`;
+        }
+
+        // ── Remove a printer ─────────────────────────────────────────────────
+        async function removePrinter(printerId) {
+            const userId = sessionStorage.getItem("hub3d_user_id");
+            await fetch(`/api/equipment/user-printers/${printerId}`, {
+                method: "DELETE",
+                headers: { "x-user-id": userId }
+            });
+            document.getElementById(`printer-row-${printerId}`)?.remove();
+            loadUserEquipment();
+        }
+
+        // ── Remove a filament ────────────────────────────────────────────────
+        async function removeFilament(filamentId) {
+            const userId = sessionStorage.getItem("hub3d_user_id");
+            await fetch(`/api/equipment/user-filaments/${filamentId}`, {
+                method: "DELETE",
+                headers: { "x-user-id": userId }
+            });
+            document.getElementById(`filament-row-${filamentId}`)?.remove();
+            loadUserEquipment();
+        }
+
+        // ── Load all printers into collapse when it opens (Phase 6.4) ────────
+        document.getElementById("printerCollapse")
+            .addEventListener("show.bs.collapse", async () => {
+                const printers = await fetch("/api/equipment/printers").then(r => r.json());
+                const group = document.querySelector("#printerCollapse .equipment-group");
+                group.innerHTML = printers.map(p => `
+                    <input type="checkbox" class="btn-check" id="printer-${p.printer_id}" autocomplete="off">
+                    <label class="btn" for="printer-${p.printer_id}">${p.brand} ${p.model}</label>
+                `).join("");
+            });
+
+        // ── Load all filaments into collapse when it opens ───────────────────
+        document.getElementById("filamentCollapse")
+            .addEventListener("show.bs.collapse", async () => {
+                const filaments = await fetch("/api/equipment/filaments").then(r => r.json());
+                const group = document.querySelector("#filamentCollapse .equipment-group");
+                group.innerHTML = filaments.map(f => `
+                    <input type="checkbox" class="btn-check" id="filament-${f.filament_id}" autocomplete="off">
+                    <label class="btn" for="filament-${f.filament_id}">${f.type}</label>
+                `).join("");
+            });
+
+        // ── Save selected printers ───────────────────────────────────────────
+        async function savePrinters() {
+            const checked = [...document.querySelectorAll("#printerCollapse .btn-check:checked")]
+                .map(el => parseInt(el.id.replace("printer-", "")));
+            const userId = sessionStorage.getItem("hub3d_user_id");
+            await fetch("/api/equipment/user-printers", {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "x-user-id": userId },
+                body: JSON.stringify({ printerIds: checked })
+            });
+            loadUserEquipment();
+            bootstrap.Collapse.getInstance(document.getElementById("printerCollapse")).hide();
+        }
+
+        // ── Save selected filaments ──────────────────────────────────────────
+        async function saveFilaments() {
+            const checked = [...document.querySelectorAll("#filamentCollapse .btn-check:checked")]
+                .map(el => parseInt(el.id.replace("filament-", "")));
+            const userId = sessionStorage.getItem("hub3d_user_id");
+            await fetch("/api/equipment/user-filaments", {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "x-user-id": userId },
+                body: JSON.stringify({ filamentIds: checked })
+            });
+            loadUserEquipment();
+            bootstrap.Collapse.getInstance(document.getElementById("filamentCollapse")).hide();
+        }
+
+    </script>
+
 </body>
 </html>
