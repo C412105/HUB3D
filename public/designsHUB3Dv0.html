@@ -358,6 +358,14 @@
                 }
             });
 
+            // Auto-reload when the search field is cleared
+            document.getElementById("searchInput").addEventListener("input", e => {
+                if (e.target.value === "") {
+                    currentQuery = "";
+                    loadDesigns(1);
+                }
+            });
+
             // Source filter dropdown
             document.getElementById("sourceFilter").addEventListener("change", e => {
                 currentSource = e.target.value;

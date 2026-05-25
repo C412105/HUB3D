@@ -249,17 +249,72 @@
 
     <!-- ========================== FUNCTIONS ========================== -->
     <script>
-        // Submit feedback — TO DO: replace with fetch('/api/feedback') call
-        function submitFeedback() {
-            const message = document.getElementById('feedbackMessage').value.trim();
+
+        // ── Spam guard: one submission per 60 seconds ────────────────
+        let lastSubmitTime = 0;
+        const COOLDOWN_MS  = 60_000;
+
+        // ── Show inline status message below the submit button ───────
+        function showFeedbackStatus(msg, type) {
+            const existing = document.getElementById("feedbackStatus");
+            if (existing) existing.remove();
+            const el       = document.createElement("p");
+            el.id          = "feedbackStatus";
+            el.className   = type === "success" ? "text-success mt-2 mb-0" : "text-danger mt-2 mb-0";
+            el.textContent = msg;
+            document.querySelector(".btn-contact-submit").after(el);
+        }
+
+        // ── Submit feedback to POST /api/feedback ───────────────────
+        async function submitFeedback() {
+            const message = document.getElementById("feedbackMessage").value.trim();
+            const btn     = document.querySelector(".btn-contact-submit");
+
+            // Client-side validation
             if (message.length < 5) {
-                alert('Please enter a message before submitting.');
+                showFeedbackStatus("Please enter at least 5 characters.", "error");
                 return;
             }
-            // Placeholder confirmation until backend is wired
-            alert('Thank you for your feedback!');
-            document.getElementById('feedbackMessage').value = '';
+            if (message.length > 1000) {
+                showFeedbackStatus("Message too long (max 1000 characters).", "error");
+                return;
+            }
+
+            // Cooldown check
+            const now  = Date.now();
+            const wait = Math.ceil((COOLDOWN_MS - (now - lastSubmitTime)) / 1000);
+            if (now - lastSubmitTime < COOLDOWN_MS) {
+                showFeedbackStatus(`Please wait ${wait}s before submitting again.`, "error");
+                return;
+            }
+
+            // Send
+            btn.disabled    = true;
+            btn.textContent = "Sending...";
+
+            try {
+                const res  = await fetch("/api/feedback", {
+                    method:  "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body:    JSON.stringify({ message })
+                });
+                const data = await res.json();
+
+                if (!res.ok) {
+                    showFeedbackStatus(data.error || "Submission failed.", "error");
+                } else {
+                    showFeedbackStatus("Thank you for your feedback!", "success");
+                    document.getElementById("feedbackMessage").value = "";
+                    lastSubmitTime = Date.now();
+                }
+            } catch {
+                showFeedbackStatus("Connection error. Please try again.", "error");
+            } finally {
+                btn.disabled    = false;
+                btn.textContent = "Submit Feedback";
+            }
         }
+
     </script>
 
 </body>
