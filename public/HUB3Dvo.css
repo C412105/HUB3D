@@ -74,14 +74,14 @@ a.nav-link.disabled, a.nav-link[aria-disabled="true"]{
 }
 
 /* Authorization buttons (Login/Signup) */
-button.btn {
+button.btn, a.btn {
     background-color: transparent;
     color: #ffffff;
     border: 1px solid #ffffff;
     font-family: Arial, sans-serif;
 }
 
-button.btn:hover {
+button.btn:hover, a.btn:hover {
     background-color: #004789;/* To be changed? */
     border-color: #5db1ff;
     color: #5db1ff;
@@ -99,7 +99,11 @@ h2, h3, h4, h5 {
 /* ========================== HOME PAGE ==========================*/
 /* CAROUSEL */
 #sitesCarousel {
-    background-color: rgba(38, 38, 36, 0.5);
+    background: rgba(38, 38, 36, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
     border-radius: 16px;
     padding: 24px 48px; /* spacing between logos & arrows */
 }
@@ -119,6 +123,7 @@ p.carousel-caption-text {
     margin-bottom: 0;
 }
 
+/* TO DO: custom styles? */
 p.carousel-caption-text small {
     color: #4ca2b5;
     font-size: 0.75rem;
@@ -126,12 +131,21 @@ p.carousel-caption-text small {
 
 /* AUTHORIZATION FORM (Login - Sign up) */
 #authCard {
-    background-color: rgba(38, 38, 36, 0.93);
-    border: 1px solid #545454;
+    background: rgba(38, 38, 36, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
     border-radius: 16px;
     max-width: 440px;
     margin: 0 auto;
     padding: 2rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#authCard:hover {
+    border-color: rgba(93, 177, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(93, 177, 255, 0.1);
 }
 
 /* Login / signup tabs switch */
@@ -595,8 +609,94 @@ select.filter-select option {
 
 .contact-privacy-note {
     font-size: 0.75rem;
-    color: #545454;
+    color: #888888;
     text-align: center;
     margin-top: 8px;
     margin-bottom: 0;
+}
+
+/* Glassmorphic card styling for contact sections */
+.contact-section-card {
+    background: rgba(38, 38, 36, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-section-card:hover {
+    border-color: rgba(93, 177, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(93, 177, 255, 0.1);
+}
+
+/* Source card design */
+.source-card {
+    background-color: rgba(26, 26, 26, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 1.25rem;
+    height: 100%;
+    transition: all 0.2s ease;
+}
+
+.source-card:hover {
+    background-color: rgba(26, 26, 26, 0.8);
+    border-color: #5db1ff;
+    transform: translateY(-3px);
+}
+
+.source-logo {
+    max-height: 40px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.4));
+}
+
+/* Brighter muted text on Contact page (sources, FAQ, feedback descriptions) */
+.text-muted {
+    color: #a0aec0 !important;
+}
+
+/* Dark style for Accordions */
+.accordion-dark .accordion-item {
+    background-color: rgba(26, 26, 26, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.accordion-dark .accordion-item:last-of-type {
+    margin-bottom: 0;
+}
+
+.accordion-dark .accordion-header .accordion-button {
+    background-color: transparent;
+    color: #ffffff;
+    box-shadow: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.accordion-dark .accordion-header .accordion-button:not(.collapsed) {
+    background-color: rgba(93, 177, 255, 0.1);
+    color: #5db1ff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.accordion-dark .accordion-button::after {
+    filter: invert(1);
+}
+
+.accordion-dark .accordion-body {
+    color: #cccccc;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    background-color: rgba(0, 0, 0, 0.2);
 }
