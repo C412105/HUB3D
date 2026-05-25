@@ -25,19 +25,8 @@
                     aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <button class="navbar-toggler" type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarNav"
-                    aria-controls="navbarNav"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>            
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto me-4">
-                    <li class="nav-item">
-                        <a class="nav-link" href="equipmentHUB3Dv0.html">My Equipment</a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="designsHUB3Dv0.html">Designs</a>
                     </li>
@@ -59,19 +48,21 @@
     <main class="page-content container mt-4 mb-5">
 
         <!-- User info bar -->
+         <!-- TO DO: Bring joined date and printer/filament quantities from backend -->
         <div id="profileHeader">
             <div id="profileAvatar">U</div>
             <div>
                 <p class="profile-name">User_1234</p>
                 <p class="profile-sub">Member since August 2025 · 2 printers · 2 filaments</p>
             </div>
+            <button class="btn-logout ms-auto" type="button">Logout</button>
         </div>
 
         <!-- Printers & Filaments -->
-        <div class="row g-4">
+        <div class="row g-4 align-items-start">
 
-            <!-- Printers -->
-            <div class="col-md-6">
+            <!-- Printers column -->
+            <div class="col-lg-6">
                 <h4 class="mb-3">My printer(s)</h4>
 
                 <div class="profile-list-row">
@@ -90,11 +81,53 @@
                     <button class="btn-remove" type="button">Remove</button>
                 </div>
 
-                <button class="btn btn-sm mt-2" type="button">+ Add printer</button>
+                <!-- Toggleable (printer checkbox panel collapse control) -->
+                <button class="btn btn-sm mt-2"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#printerCollapse"
+                        aria-expanded="false"
+                        aria-controls="printerCollapse">
+                    + Add printer
+                </button>
+            
+
+            <!-- TO DO: Backend reads .active on labels to know which printers are selected -->
+            <div class="collapse mt-3" id="printerCollapse">
+                    <div class="equipment-group mb-3" role="group" aria-label="Printer selection">
+                        <input type="checkbox" class="btn-check" id="printer-ender3" autocomplete="off">
+                        <label class="btn" for="printer-ender3">Ender 3</label>
+
+                        <input type="checkbox" class="btn-check" id="printer-ender3pro" autocomplete="off">
+                        <label class="btn" for="printer-ender3pro">Ender 3 Pro</label>
+
+                        <input type="checkbox" class="btn-check" id="printer-prusaMK4" autocomplete="off">
+                        <label class="btn" for="printer-prusaMK4">Prusa MK4</label>
+
+                        <input type="checkbox" class="btn-check" id="printer-bambuX1" autocomplete="off">
+                        <label class="btn" for="printer-bambuX1">Bambu Lab X1</label>
+
+                        <input type="checkbox" class="btn-check" id="printer-bambuP1S" autocomplete="off">
+                        <label class="btn" for="printer-bambuP1S">Bambu Lab P1S</label>
+
+                        <input type="checkbox" class="btn-check" id="printer-kobra" autocomplete="off">
+                        <label class="btn" for="printer-kobra">Anycubic Kobra</label>
+
+                        <input type="checkbox" class="btn-check" id="printer-voron" autocomplete="off">
+                        <label class="btn" for="printer-voron">Voron 2.4</label>
+
+                        <input type="checkbox" class="btn-check" id="printer-artillery" autocomplete="off">
+                        <label class="btn" for="printer-artillery">Artillery Sidewinder</label>
+                    </div>
+                    <div class="equipment-actions">
+                        <!-- <button class="btn btn-sm" type="button">Reset</button> -->
+                        <button class="btn btn-sm" type="button">Save</button>
+                    </div>
+                </div>
             </div>
 
             <!-- Filaments column -->
-            <div class="col-md-6">
+            <div class="col-lg-6">
                 <h4 class="mb-3">My filament(s)</h4>
 
                 <div class="profile-list-row">
@@ -113,16 +146,52 @@
                     <button class="btn-remove" type="button">Remove</button>
                 </div>
 
-                <button class="btn btn-sm mt-2" type="button">+ Add filament</button>
+                <!-- Toggleable (filament checkbox panel collapse control) -->
+                <button class="btn btn-sm mt-2"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#filamentCollapse"
+                        aria-expanded="false"
+                        aria-controls="filamentCollapse">
+                    + Add filament
+                </button>
+
+                <!-- TO DO: Backend reads .active on labels to know which filaments are selected -->
+                <div class="collapse mt-3" id="filamentCollapse">
+                    <div class="equipment-group mb-3" role="group" aria-label="Filament selection">
+                        <input type="checkbox" class="btn-check" id="fil-pla" autocomplete="off">
+                        <label class="btn" for="fil-pla">PLA</label>
+
+                        <input type="checkbox" class="btn-check" id="fil-petg" autocomplete="off">
+                        <label class="btn" for="fil-petg">PETG</label>
+
+                        <input type="checkbox" class="btn-check" id="fil-abs" autocomplete="off">
+                        <label class="btn" for="fil-abs">ABS</label>
+
+                        <input type="checkbox" class="btn-check" id="fil-tpu" autocomplete="off">
+                        <label class="btn" for="fil-tpu">TPU</label>
+
+                        <input type="checkbox" class="btn-check" id="fil-asa" autocomplete="off">
+                        <label class="btn" for="fil-asa">ASA</label>
+
+                        <input type="checkbox" class="btn-check" id="fil-nylon" autocomplete="off">
+                        <label class="btn" for="fil-nylon">Nylon</label>
+
+                        <input type="checkbox" class="btn-check" id="fil-hips" autocomplete="off">
+                        <label class="btn" for="fil-hips">HIPS</label>
+
+                        <input type="checkbox" class="btn-check" id="fil-resin" autocomplete="off">
+                        <label class="btn" for="fil-resin">Resin</label>
+                    </div>
+                    <div class="equipment-actions">
+                        <!-- <button class="btn btn-sm" type="button">Reset</button> -->
+                        <button class="btn btn-sm" type="button">Save</button>
+                    </div>
+                </div>
             </div>
 
         </div>
         
-        <!-- Logout button -->
-        <div class="d-flex justify-content-end mt-4">
-            <button class="btn-logout" type="button">Logout</button>
-        </div>
-
     </main>
 
     <!-- ========================== FOOTER ========================== -->
