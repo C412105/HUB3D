@@ -1,53 +1,76 @@
+// controllers/usersController.js
 const supabase = require("../db/supabaseClient");
 
-// ── GET /api/users/:id (get profile) ──────────────────────────────
-exports.getUser = async (req, res) => {
-  const { id } = req.params;
-  const { data, error } = await supabase
-    .from("users")
-    .select("user_id, username, created_at")
-    .eq("user_id", id)
-    .single();
-
-  if (error) return res.status(404).json({ error: "User not found" });
-  res.json(data);
-};
-
-// ── POST /api/users/register (create account) ────────────────────────
+// ── POST /api/users/register ────────────────────────────────
 exports.register = async (req, res) => {
-  const { email, username, password } = req.body;
+    const { email, username, password } = req.body;
 
-  // Basic validation
-  if (!email || !username || !password)
-    return res.status(400).json({ error: "All fields are required" });
+    // Validation
+    if (!email || !username || !password)
+        return res.status(400).json({ error: "All fields are required" });
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email))
-    return res.status(400).json({ error: "Invalid email format" });
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email))
+        return res.status(400).json({ error: "Invalid email format" });
 
-  if (password.length < 6)
-    return res.status(400).json({ error: "Password must be at least 6 characters" });
+    if (password.length < 8)
+        return res.status(400).json({ error: "Password must be at least 8 characters" });
 
-  // TO DO: Use Supabase Auth when deployed.
-  const { data, error } = await supabase
-    .from("users")
-    .insert([{ email, username }])  // Storing passwords for MVP
-    .select()
-    .single();
+    // Step 1: create user in Supabase Auth
+    const { data: authData, error: authError } = await supabase.auth.signUp({
+        email,
+        password
+    });
 
-  if (error) return res.status(500).json({ error: error.message });
-  res.status(201).json({ message: "User created", user: data });
+    if (authError) return res.status(500).json({ error: authError.message });
+
+    // Step 2: insert into profiles table using the Auth-generated user_id
+    const { data, error } = await supabase
+        .from("profiles")
+        .insert([{ user_id: authData.user.id, username }])
+        .select()
+        .single();
+
+    if (error) return res.status(500).json({ error: error.message });
+
+    res.status(201).json({
+        message: "User created",
+        user: { id: authData.user.id, username }
+    });
 };
 
-// ── POST /api/users/login (authenticate) ───────────────────────────
+// ── POST /api/users/login ───────────────────────────────────
 exports.login = async (req, res) => {
-  const { email, password } = req.body;
-  if (!email || !password)
-    return res.status(400).json({ error: "Email and password are required" });
+    const { email, password } = req.body;
 
-  // Supabase Auth sign-in (automatic password hashing)
-  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    if (!email || !password)
+        return res.status(400).json({ error: "Email and password are required" });
 
-  if (error) return res.status(401).json({ error: "Invalid credentials" });
-  res.json({ message: "Login successful", session: data.session });
+    const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password
+    });
+
+    if (error) return res.status(401).json({ error: "Invalid credentials" });
+
+    // Fetch username from profiles
+    const { data: profile } = await supabase
+        .from("profiles")
+        .select("username, created_at")
+        .eq("user_id", data.user.id)
+        .single();
+
+    res.json({
+        message: "Login successful",
+        userId: data.user.id,
+        username: profile?.username,
+        joinedAt: profile?.created_at
+    });
+};
+
+// ── POST /api/users/logout ──────────────────────────────────
+exports.logout = async (req, res) => {
+    const { error } = await supabase.auth.signOut();
+    if (error) return res.status(500).json({ error: error.message });
+    res.json({ message: "Logged out" });
 };

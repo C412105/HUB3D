@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="HUB3D — discover and filter 3D print designs compatible with your printer and filaments.">
+    <meta name="description"
+        content="HUB3D — discover and filter 3D print designs compatible with your printer and filaments.">
     <title>HUB3D — Home</title>
 
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <!-- Bootstrap Icons CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
@@ -16,8 +19,9 @@
     <!-- Deferred JS file for DOM to start after js file/script loaded -->
     <script src="HUB3dv0.js" defer></script>
 </head>
+
 <body>
-   
+
     <!-- ========================== NAVBAR ========================== -->
     <nav id="navbar" class="navbar navbar-expand-lg mx-3 my-3">
         <div class="container-fluid">
@@ -28,12 +32,8 @@
             </a>
 
             <!-- Hamburger toggle (data-bs-toggle="collapse" Bootstrap JS component) -->
-            <button class="navbar-toggler" type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarNav"
-                    aria-controls="navbarNav"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -44,18 +44,14 @@
 
                     <!-- Logged-out: popovers block access -->
                     <li class="nav-item hide-if-logged-in">
-                        <a class="nav-link" href="#"
-                           data-bs-toggle="popover"
-                           data-bs-trigger="hover"
-                           data-bs-content="Please log in to access this section."
-                           data-bs-placement="bottom">Designs</a>
+                        <a class="nav-link" href="#" data-bs-toggle="popover" data-bs-trigger="hover"
+                            data-bs-content="Please log in to access this section."
+                            data-bs-placement="bottom">Designs</a>
                     </li>
                     <li class="nav-item hide-if-logged-in">
-                        <a class="nav-link" href="#"
-                           data-bs-toggle="popover"
-                           data-bs-trigger="hover"
-                           data-bs-content="Please log in to access this section."
-                           data-bs-placement="bottom">Profile</a>
+                        <a class="nav-link" href="#" data-bs-toggle="popover" data-bs-trigger="hover"
+                            data-bs-content="Please log in to access this section."
+                            data-bs-placement="bottom">Profile</a>
                     </li>
                     <!-- Logged-in: real links (hidden until applyAuthState runs) -->
                     <li class="nav-item show-if-logged-in" style="display:none">
@@ -75,11 +71,12 @@
 
     <!-- ========================== CONTENT ========================== -->
     <main class="page-content">
-        
+
         <!-- Title -->
         <div id="homeTitle" class="container mb-5 text-center">
             <h2>Find 3D designs that work with your equipment</h2>
-            <p>Track your printers and filaments, then discover designs that are compatible with your exact setup. No more failed prints or wasted materials.</p>
+            <p>Track your printers and filaments, then discover designs that are compatible with your exact setup. No
+                more failed prints or wasted materials.</p>
         </div>
 
         <!-- Carousel (IDs used for controls, hidden until more sites are added) -->
@@ -92,7 +89,8 @@
                         <div class="row justify-content-center align-items-center g-3">
                             <div class="col-3 text-center">
                                 <a href="https://www.myminifactory.com" target="_blank">
-                                    <img src="Media/MyMiniFactoryLogo.png" alt="MyMiniFactory" class="img-fluid carousel-logo">
+                                    <img src="Media/MyMiniFactoryLogo.png" alt="MyMiniFactory"
+                                        class="img-fluid carousel-logo">
                                 </a>
                                 <p class="mt-2 carousel-caption-text">MyMiniFactory<br><small>Community</small></p>
                             </div>
@@ -104,13 +102,15 @@
                             </div>
                             <div class="col-3 text-center">
                                 <a href="https://www.thingiverse.com" target="_blank">
-                                    <img src="Media/ThingiverseLogo.png" alt="Thingiverse" class="img-fluid carousel-logo">
+                                    <img src="Media/ThingiverseLogo.png" alt="Thingiverse"
+                                        class="img-fluid carousel-logo">
                                 </a>
                                 <p class="mt-2 carousel-caption-text">Thingiverse<br><small>Free designs</small></p>
                             </div>
                             <div class="col-3 text-center">
                                 <a href="https://www.printables.com" target="_blank">
-                                    <img src="Media/PrintablesLogo.png" alt="Printables" class="img-fluid carousel-logo">
+                                    <img src="Media/PrintablesLogo.png" alt="Printables"
+                                        class="img-fluid carousel-logo">
                                 </a>
                                 <p class="mt-2 carousel-caption-text">Printables<br><small>By Josef Prusa</small></p>
                             </div>
@@ -119,11 +119,13 @@
                 </div>
 
                 <!-- Prev / Next controls (useful when more sites are added later) -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#sitesCarousel" data-bs-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#sitesCarousel"
+                    data-bs-slide="prev">
                     <span class="carousel-control-prev-icon"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#sitesCarousel" data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#sitesCarousel"
+                    data-bs-slide="next">
                     <span class="carousel-control-next-icon"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
@@ -164,7 +166,7 @@
 
                 <!-- SIGN UP PANEL (hidden by default) -->
                 <!-- CSS style="display:none" to hide the panel initially. Toggled with toggleAuthTab -->
-                 <!-- TO-DO: How to move this style from the tag here (inline) to CSS file -->
+                <!-- TO-DO: How to move this style from the tag here (inline) to CSS file -->
                 <div id="signupPanel">
                     <div class="mb-3">
                         <label for="signupEmail">Email</label>
@@ -192,204 +194,196 @@
     </footer>
 
     <!-- Bootstrap / JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
     <!-- ========================== FUNCTIONS ========================== -->
     <!-- Switch between Log in and Get started -->
     <script>
-    // POPOVER (Bootstrap) - Used by data-bs-toggle="popover"
-    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
-    popoverTriggerList.forEach(el => new bootstrap.Popover(el));
+        // POPOVER (Bootstrap) - Used by data-bs-toggle="popover"
+        const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+        popoverTriggerList.forEach(el => new bootstrap.Popover(el));
 
-    // Hide carousel controls if only one slide exists
-    document.addEventListener("DOMContentLoaded", () => {
-        const items = document.querySelectorAll(".carousel-item");
-        if (items.length <= 1) {
-            document.querySelectorAll(".carousel-control-prev, .carousel-control-next, .carousel-indicators")
-                .forEach(el => el.style.display = "none");
-        }
-    });
-
-    // ========================== Auth tab switcher ==========================
-    // Caching the panels here so every function below can reuse them
-    // without querying the DOM repeatedly.
-    const loginPanel  = document.getElementById('loginPanel');
-    const signupPanel = document.getElementById('signupPanel');
-
-    // Sign-up panel hidden on load via CSS (#signupPanel { display: none })
-
-    function toggleAuthTab(tab) {
-        const tabLoginBtn  = document.getElementById('tabLogin');
-        const tabSignupBtn = document.getElementById('tabSignup');
-
-        if (tab === 'login') {
-            loginPanel.style.display  = 'block';
-            signupPanel.style.display = 'none';
-            tabLoginBtn.classList.add('active');
-            tabSignupBtn.classList.remove('active');
-        } else {
-            loginPanel.style.display  = 'none';
-            signupPanel.style.display = 'block';
-            tabSignupBtn.classList.add('active');
-            tabLoginBtn.classList.remove('active');
-        }
-        // Clear validation errors when switching tabs
-        clearErrors();
-    }
-
-
-    // ========================== Validation helpers ==========================
-    // Check that string matches standard email pattern (regex)
-    function isValidEmail(email) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-    }
-
-    // Adds or remove error message below input field(s)
-    function setFieldError(fieldId, message) {
-        const field = document.getElementById(fieldId);
-
-        // Remove existing error for field first
-        const existingError = document.getElementById(fieldId + '-error');
-        if (existingError) existingError.remove();
-
-        if (message) {
-            // Create and inset error message
-            const errorEl = document.createElement('div');
-            errorEl.id = fieldId + '-error';
-            errorEl.className = 'field-error';
-            errorEl.textContent = message;
-            field.parentNode.appendChild(errorEl);
-            field.classList.add('is-invalid');
-            field.classList.remove('is-valid');
-        } else {
-            // No error: mark green 
-            field.classList.remove('is-invalid');
-            field.classList.add('is-valid');
-        }
-    }
-
-    // Removal of validation states
-    function clearErrors() {
-        const allFields = ['loginEmail', 'loginPassword',
-                           'signupEmail', 'signupPassword', 'signupConfirm'];
-        allFields.forEach(id => {
-            const field = document.getElementById(id);
-            field.classList.remove('is-invalid', 'is-valid');
-            const err = document.getElementById(id + '-error');
-            if (err) err.remove();
+        // Hide carousel controls if only one slide exists
+        document.addEventListener("DOMContentLoaded", () => {
+            const items = document.querySelectorAll(".carousel-item");
+            if (items.length <= 1) {
+                document.querySelectorAll(".carousel-control-prev, .carousel-control-next, .carousel-indicators")
+                    .forEach(el => el.style.display = "none");
+            }
         });
-    }
 
+        // ========================== Auth tab switcher ==========================
+        // Caching the panels here so every function below can reuse them
+        // without querying the DOM repeatedly.
+        const loginPanel = document.getElementById('loginPanel');
+        const signupPanel = document.getElementById('signupPanel');
 
-    // ========================== Login validation ==========================
-    async function handleLogin() {
-        let isValid = true;
+        // Sign-up panel hidden on load via CSS (#signupPanel { display: none })
 
-        const email    = document.getElementById('loginEmail').value.trim();
-        const password = document.getElementById('loginPassword').value;
+        function toggleAuthTab(tab) {
+            const tabLoginBtn = document.getElementById('tabLogin');
+            const tabSignupBtn = document.getElementById('tabSignup');
 
-        if (!isValidEmail(email)) {
-            setFieldError('loginEmail', 'Please enter a valid email address.');
-            isValid = false;
-        } else {
-            setFieldError('loginEmail', null);
-        }
-
-        // Checks field isn't empty — Password verification on backend
-        if (password.length === 0) {
-            setFieldError('loginPassword', 'Please enter your password.');
-            isValid = false;
-        } else {
-            setFieldError('loginPassword', null);
-        }
-
-        if (!isValid) return;
-
-        try {
-            const res  = await fetch('/api/users/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password })
-            });
-            const data = await res.json();
-            if (!res.ok) {
-                setFieldError('loginPassword', data.error || 'Login failed.');
-                return;
-            }
-            sessionStorage.setItem('hub3d_user_id',  data.user.id);
-            sessionStorage.setItem('hub3d_username', data.user.email);
-            window.location.href = 'designsHUB3Dv0.html';
-        } catch {
-            setFieldError('loginPassword', 'Connection error. Please try again.');
-        }
-    }
-
-
-    // ========================== Sign-up validation ==========================
-    async function handleSignup() {
-        let isValid = true;
-
-        const email    = document.getElementById('signupEmail').value.trim();
-        const password = document.getElementById('signupPassword').value;
-        const confirm  = document.getElementById('signupConfirm').value;
-
-        if (!isValidEmail(email)) {
-            setFieldError('signupEmail', 'Please enter a valid email address.');
-            isValid = false;
-        } else {
-            setFieldError('signupEmail', null);
-        }
-
-        // Minimum password length
-        if (password.length < 8) {
-            setFieldError('signupPassword', 'Password must be at least 8 characters.');
-            isValid = false;
-        } else {
-            setFieldError('signupPassword', null);
-        }
-
-        // Password match check
-        if (confirm !== password) {
-            setFieldError('signupConfirm', 'Passwords do not match.');
-            isValid = false;
-        } else if (confirm.length > 0) {
-            setFieldError('signupConfirm', null);
-        }
-
-        if (!isValid) return;
-
-        try {
-            const username = email.split('@')[0];
-            const res  = await fetch('/api/users/register', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, username, password })
-            });
-            const data = await res.json();
-            if (!res.ok) {
-                setFieldError('signupEmail', data.error || 'Registration failed.');
-                return;
-            }
-            // Auto-login after registration
-            const loginRes  = await fetch('/api/users/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password })
-            });
-            const loginData = await loginRes.json();
-            if (loginRes.ok) {
-                sessionStorage.setItem('hub3d_user_id',  loginData.user.id);
-                sessionStorage.setItem('hub3d_username', loginData.user.email);
-                window.location.href = 'designsHUB3Dv0.html';
+            if (tab === 'login') {
+                loginPanel.style.display = 'block';
+                signupPanel.style.display = 'none';
+                tabLoginBtn.classList.add('active');
+                tabSignupBtn.classList.remove('active');
             } else {
-                toggleAuthTab('login');
+                loginPanel.style.display = 'none';
+                signupPanel.style.display = 'block';
+                tabSignupBtn.classList.add('active');
+                tabLoginBtn.classList.remove('active');
             }
-        } catch {
-            setFieldError('signupEmail', 'Connection error. Please try again.');
+            // Clear validation errors when switching tabs
+            clearErrors();
         }
-    }
-</script>
+
+
+        // ========================== Validation helpers ==========================
+        // Check that string matches standard email pattern (regex)
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Adds or remove error message below input field(s)
+        function setFieldError(fieldId, message) {
+            const field = document.getElementById(fieldId);
+
+            // Remove existing error for field first
+            const existingError = document.getElementById(fieldId + '-error');
+            if (existingError) existingError.remove();
+
+            if (message) {
+                // Create and inset error message
+                const errorEl = document.createElement('div');
+                errorEl.id = fieldId + '-error';
+                errorEl.className = 'field-error';
+                errorEl.textContent = message;
+                field.parentNode.appendChild(errorEl);
+                field.classList.add('is-invalid');
+                field.classList.remove('is-valid');
+            } else {
+                // No error: mark green 
+                field.classList.remove('is-invalid');
+                field.classList.add('is-valid');
+            }
+        }
+
+        // Removal of validation states
+        function clearErrors() {
+            const allFields = ['loginEmail', 'loginPassword',
+                'signupEmail', 'signupPassword', 'signupConfirm'];
+            allFields.forEach(id => {
+                const field = document.getElementById(id);
+                field.classList.remove('is-invalid', 'is-valid');
+                const err = document.getElementById(id + '-error');
+                if (err) err.remove();
+            });
+        }
+
+
+        // ========================== Login validation ==========================
+        async function handleLogin() {
+            let isValid = true;
+
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            if (!isValidEmail(email)) {
+                setFieldError('loginEmail', 'Please enter a valid email address.');
+                isValid = false;
+            } else {
+                setFieldError('loginEmail', null);
+            }
+
+            // Checks field isn't empty — Password verification on backend
+            if (password.length === 0) {
+                setFieldError('loginPassword', 'Please enter your password.');
+                isValid = false;
+            } else {
+                setFieldError('loginPassword', null);
+            }
+
+            if (isValid) {
+                try {
+                    const res = await fetch("/api/users/login", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ email, password })
+                    });
+                    const data = await res.json();
+                    if (!res.ok) {
+                        setFieldError("loginEmail", data.error);
+                        return;
+                    }
+                    // Save session to sessionStorage
+                    sessionStorage.setItem("hub3d_user_id", data.userId);
+                    sessionStorage.setItem("hub3d_username", data.username);
+                    // Redirect to designs page
+                    window.location.href = "designsHUB3Dv0.html";
+                } catch (err) {
+                    setFieldError("loginEmail", "Connection error. Please try again.");
+                }
+            }
+        }
+
+
+        // ========================== Sign-up validation ==========================
+        async function handleSignup() {
+            let isValid = true;
+
+            const email = document.getElementById('signupEmail').value.trim();
+            const password = document.getElementById('signupPassword').value;
+            const confirm = document.getElementById('signupConfirm').value;
+
+            if (!isValidEmail(email)) {
+                setFieldError('signupEmail', 'Please enter a valid email address.');
+                isValid = false;
+            } else {
+                setFieldError('signupEmail', null);
+            }
+
+            // Minimum password length
+            if (password.length < 8) {
+                setFieldError('signupPassword', 'Password must be at least 8 characters.');
+                isValid = false;
+            } else {
+                setFieldError('signupPassword', null);
+            }
+
+            // Password match check
+            if (confirm !== password) {
+                setFieldError('signupConfirm', 'Passwords do not match.');
+                isValid = false;
+            } else if (confirm.length > 0) {
+                setFieldError('signupConfirm', null);
+            }
+
+            if (isValid) {
+                try {
+                    const res = await fetch("/api/users/register", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ email, username: email.split("@")[0], password })
+                    });
+                    const data = await res.json();
+                    if (!res.ok) {
+                        setFieldError("signupEmail", data.error);
+                        return;
+                    }
+                    // Switch to login tab after successful signup
+                    toggleAuthTab("login");
+                } catch (err) {
+                    setFieldError("signupEmail", "Connection error. Please try again.");
+                }
+            }
+        }
+    </script>
 
 </body>
+
 </html>
