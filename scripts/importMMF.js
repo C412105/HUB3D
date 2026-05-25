@@ -12,7 +12,14 @@
 // ─────────────────────────────────────────────────────────────
 
 require("dotenv").config();
-const supabase = require("../db/supabaseClient");
+
+// Use the service role key so this script can bypass RLS and write to `designs`.
+// The anon key (used by the Express app) is read-only on catalog tables by design.
+const { createClient } = require("@supabase/supabase-js");
+const supabase = createClient(
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_SERVICE_KEY   // ← bypasses RLS; never expose in frontend
+);
 
 const MMF_API_KEY = process.env.MMF_API_KEY;
 const MMF_BASE    = "https://www.myminifactory.com/api/v2";
@@ -69,6 +76,11 @@ async function run() {
     if (!MMF_API_KEY) {
         console.error("❌  MMF_API_KEY is not set in .env");
         console.error("    Get a key at https://www.myminifactory.com/user/register");
+        process.exit(1);
+    }
+    if (!process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_SERVICE_KEY === "your_service_role_key_here") {
+        console.error("❌  SUPABASE_SERVICE_KEY is not set in .env");
+        console.error("    Find it in: Supabase dashboard → Project Settings → API → service_role");
         process.exit(1);
     }
 

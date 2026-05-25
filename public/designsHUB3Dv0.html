@@ -103,13 +103,13 @@
                     <option value="resin">Resin</option>
                 </select>
 
-                <!-- Source -->
+                <!-- Source (values = source_id in design_sources table) -->
                 <select id="sourceFilter" class="form-select filter-select" aria-label="Filter by source">
                     <option value="">All sources</option>
-                    <option value="thingiverse">Thingiverse</option>
-                    <option value="printables">Printables</option>
-                    <option value="myminifactory">MyMiniFactory</option>
-                    <option value="cults3d">Cults3D</option>
+                    <option value="1">MyMiniFactory</option>
+                    <option value="2">Cults3D</option>
+                    <option value="3">Thingiverse</option>
+                    <option value="4">Printables</option>
                 </select>
 
             </div>
@@ -134,10 +134,9 @@
             <!-- cards injected here -->
         </div>
 
-        <!-- Pagination component (Bootstrap) -->
         <!-- Pagination — injected by renderPagination() -->
         <nav aria-label="Designs pagination">
-            <ul id="pagination" class="pagination justify-content-center"></ul>
+            <div id="pagination"></div>
         </nav>
 
     </main>
@@ -261,10 +260,10 @@
 
             if (totalPages <= 1) { paginationEl.innerHTML = ""; return; }
 
-            const prev = page <= 1             ? "disabled" : "";
-            const next = page >= totalPages    ? "disabled" : "";
+            const atFirst = page <= 1;
+            const atLast  = page >= totalPages;
 
-            // Show up to 5 page buttons centred around current page
+            // Up to 5 page number buttons centred around current page
             const start = Math.max(1, page - 2);
             const end   = Math.min(totalPages, start + 4);
             let pageItems = "";
@@ -277,16 +276,31 @@
                     </li>`;
             }
 
+            // Layout: [« First  Previous]   [page numbers]   [Next  Last »]
             paginationEl.innerHTML = `
-                <li class="page-item ${prev}">
-                    <a class="page-link" href="#"
-                       onclick="loadDesigns(${page - 1}); return false;">Previous</a>
-                </li>
-                ${pageItems}
-                <li class="page-item ${next}">
-                    <a class="page-link" href="#"
-                       onclick="loadDesigns(${page + 1}); return false;">Next</a>
-                </li>`;
+                <ul class="pagination mb-0">
+                    <li class="page-item ${atFirst ? "disabled" : ""}">
+                        <a class="page-link" href="#"
+                           onclick="loadDesigns(1); return false;" title="First page">«</a>
+                    </li>
+                    <li class="page-item ${atFirst ? "disabled" : ""}">
+                        <a class="page-link" href="#"
+                           onclick="loadDesigns(${page - 1}); return false;">Previous</a>
+                    </li>
+                </ul>
+                <ul class="pagination mb-0">
+                    ${pageItems}
+                </ul>
+                <ul class="pagination mb-0">
+                    <li class="page-item ${atLast ? "disabled" : ""}">
+                        <a class="page-link" href="#"
+                           onclick="loadDesigns(${page + 1}); return false;">Next</a>
+                    </li>
+                    <li class="page-item ${atLast ? "disabled" : ""}">
+                        <a class="page-link" href="#"
+                           onclick="loadDesigns(${totalPages}); return false;" title="Last page">»</a>
+                    </li>
+                </ul>`;
         }
 
         // ── Toggle favourite (hits API + updates icon) ───────────────

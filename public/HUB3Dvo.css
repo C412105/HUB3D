@@ -16,10 +16,20 @@ main.page-content {
     flex: 1;
 }
 
-/* NAVBAR & FOOTER*/
-nav#navbar, footer#disclaimer {
+/* NAVBAR */
+nav#navbar {
+    background: rgba(38, 38, 36, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+}
+
+/* FOOTER */
+footer#disclaimer {
     background: linear-gradient(to right, #545454, #262624);
-    border-radius: 16px;/* rounded corners */
+    border-radius: 16px;
 }
 
 /* Navbar visual fix (mx-3 and my-3 = 1rem) */
@@ -67,7 +77,7 @@ a.nav-link:hover {
 
 /* Active page's link disabled */
 a.nav-link.disabled, a.nav-link[aria-disabled="true"]{
-    color: #545454 !important;
+    color: rgba(255, 255, 255, 0.35) !important;
     cursor: default;
     pointer-events: none; /*Prevent clicking*/
     text-decoration: none;
@@ -424,6 +434,20 @@ select.filter-select option {
 .design-card .fav-btn:hover,
 .design-card .fav-btn.active {
     color: #5db1ff;
+}
+
+/* Pagination — full-width three-group layout (ul) */
+div#pagination {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Remove gap between « and Previous, Next and » */
+div#pagination .pagination {
+    margin-bottom: 0;
+    flex-wrap: nowrap;
 }
 
 /* Pagination */
