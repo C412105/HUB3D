@@ -1,12 +1,21 @@
 /* https://cssgradient.io/ */
 
+/* ========================== FONTS ==========================*/
+@font-face {
+  font-family: 'Science Gothic';
+  src: url('Media/Science_Gothic/ScienceGothic-VariableFont_CTRS,slnt,wdth,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-stretch: 50% 200%;
+  font-display: swap;
+}
+
 /* ========================== GLOBAL ==========================*/
 /*Used flexbox to better fill the page, keep footer at bottom*/
 body {
   --bs-gradient: linear-gradient(45deg, #000000, #003f82, #4ca2b5);
   background-image: var(--bs-gradient);
   min-height: 100vh; /* makes the gradient fill the full screen height */
-  font-family: Arial, sans-serif;
+  font-family: 'Science Gothic', sans-serif;
   display: flex;
   flex-direction: column;
 }
@@ -99,7 +108,7 @@ button.btn, a.btn {
     background-color: transparent;
     color: #ffffff;
     border: 1px solid #ffffff;
-    font-family: Arial, sans-serif;
+    font-family: 'Science Gothic', sans-serif;
 }
 
 button.btn:hover, a.btn:hover {
@@ -186,7 +195,7 @@ p.carousel-caption-text small {
     cursor: pointer;
     margin-bottom: -1px;  /* overlaps the row border */
     border-radius: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Science Gothic', sans-serif;
 }
 
 #authCard .auth-tab-btn.active {
@@ -240,7 +249,7 @@ p.carousel-caption-text small {
     padding: 10px;
     border-radius: 8px;
     font-size: 1rem;
-    font-family: Arial, sans-serif;
+    font-family: 'Science Gothic', sans-serif;
     margin-top: 0.5rem;
 }
 
@@ -344,7 +353,7 @@ input.is-valid {
     cursor: pointer;
     transition: all 0.2s;
     background: none;
-    font-family: Arial, sans-serif;
+    font-family: 'Science Gothic', sans-serif;
 }
 
 /* Off — gray */
@@ -557,7 +566,7 @@ div#pagination .pagination {
     border-radius: 8px;
     font-size: 0.8rem;
     padding: 3px 14px;
-    font-family: Arial, sans-serif;
+    font-family: 'Science Gothic', sans-serif;
 }
 
 .btn-remove:hover {
@@ -572,7 +581,7 @@ div#pagination .pagination {
     color: #dc3545;
     border-radius: 8px;
     padding: 5px 20px;
-    font-family: Arial, sans-serif;
+    font-family: 'Science Gothic', sans-serif;
     font-size: 0.9rem;
 }
 
@@ -635,7 +644,7 @@ div#pagination .pagination {
     padding: 10px;
     font-size: 1rem;
     font-weight: 500;
-    font-family: Arial, sans-serif;
+    font-family: 'Science Gothic', sans-serif;
 }
 
 .btn-contact-submit:hover {
