@@ -66,6 +66,17 @@ h1.navbar-brand {
   margin-bottom: 0;
   }
 
+.navbar-logo {
+  height: 38px;
+  width: auto;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.navbar-logo:hover {
+  transform: scale(1.03);
+  filter: brightness(1.15);
+}
+
 a.nav-link {
     color: #ffffff;
     font-size: 120%;
