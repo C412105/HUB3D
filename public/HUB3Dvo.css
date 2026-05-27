@@ -46,6 +46,17 @@ nav#navbar {
     margin: 1rem;
 }
 
+/* Uniform inner padding — balances logo-left vs. links-right spacing */
+nav#navbar .container-fluid {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+}
+
+/* Remove the me-4 asymmetry; container padding handles both sides equally */
+nav#navbar .navbar-nav {
+    margin-right: 0 !important;
+}
+
 /* Navbar toggle into burger icon */
 .navbar-toggler {
     border-color: rgba(255, 255, 255, 0.5);
@@ -508,6 +519,44 @@ div#pagination .pagination {
 /* Semi-transparent background when pill is untoggled */
 .pill-filter:not(.active) {
     background: rgba(255,255,255,0.08);
+}
+
+/* "Coming soon" badge used in Sources section of Contact page */
+.badge-coming-soon {
+    background-color: rgba(220, 53, 69, 0.15);
+    border: 1px solid rgba(220, 53, 69, 0.4);
+    color: #f08090;
+    font-size: 0.73rem;
+    font-weight: 500;
+    padding: 0.3em 0.65em;
+    border-radius: 0.375rem;
+}
+
+/* "Filters coming soon" hint line below the filter row */
+.filters-coming-soon-note {
+    font-size: 0.78rem;
+    color: #888888;
+    margin-top: 0.4rem;
+    margin-bottom: 0;
+}
+
+/* Reset filters button — sits in the pill row, pushed to the far right */
+.btn-reset-filters {
+    background: none;
+    border: 1px solid #545454;
+    border-radius: 20px;
+    color: #888888;
+    font-size: 0.82rem;
+    padding: 4px 14px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    font-family: Arial, sans-serif;
+    margin-left: auto;
+}
+
+.btn-reset-filters:hover {
+    border-color: #5db1ff;
+    color: #5db1ff;
 }
 
 /* ========================== PROFILE PAGE ==========================*/

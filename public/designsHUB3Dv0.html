@@ -63,8 +63,10 @@
                 <input type="text" id="searchInput" class="form-control"
                     placeholder="Search designs..."
                     aria-label="Search designs"
-                    style="background:#262624; color:#fff; border-color:#545454;">
-                <button class="btn btn-sm flex-shrink-0" type="button">Search</button>
+                    style="background:#262624; color:#fff; border-color:#545454;"
+                    onkeydown="if(event.key==='Enter') triggerSearch()">
+                <button class="btn btn-sm flex-shrink-0" type="button"
+                        onclick="triggerSearch()">Search</button>
             </div>
         </div>
 
@@ -72,12 +74,10 @@
         <div class="col-12 col-md-6">
             <div class="d-flex gap-2 flex-wrap">
 
-                <!-- Rating -->
-                <select id="ratingFilter" class="form-select filter-select" aria-label="Filter by rating">
-                    <option value="">All ratings</option>
-                    <option value="5">★★★★★ 5 stars</option>
-                    <option value="4">★★★★☆ 4+ stars</option>
-                    <option value="3">★★★☆☆ 3+ stars</option>
+                <!-- Rating (coming soon — no rating column in DB yet) -->
+                <select id="ratingFilter" class="form-select filter-select" aria-label="Filter by rating"
+                        disabled title="Rating filter — coming soon">
+                    <option value="">Rating (coming soon)</option>
                 </select>
 
                 <!-- Printer (coming soon — no DB column to filter against yet) -->
@@ -105,12 +105,19 @@
         </div>
     </div>
 
+    <!-- Coming soon note for disabled filters -->
+    <p class="filters-coming-soon-note">
+        <i class="bi bi-info-circle me-1" style="color:#4ca2b5;"></i>
+        Rating · Printer · Filament filters are coming soon
+    </p>
+
     <!-- ========================== FILTER INDICATOR PILLS ==========================
          Toggle buttons that activate special filter modes.
          Green = My Setup Only (compat_check = true designs)
          Blue  = Favourites   (user's saved designs)
-         toggleIndicator() handles mutual exclusivity and calls loadDesigns(1). -->
-    <div class="d-flex gap-3 mb-4">
+         toggleIndicator() handles mutual exclusivity and calls loadDesigns(1).
+         resetFilters() clears all state and returns to the default view. -->
+    <div class="d-flex gap-3 mb-4 align-items-center flex-wrap">
         <button class="filter-indicator ind-off" id="indSetup"
                 onclick="toggleIndicator('indSetup', 'ind-green')">
             ✓ My setup only
@@ -118,6 +125,9 @@
         <button class="filter-indicator ind-off" id="indFavs"
                 onclick="toggleIndicator('indFavs', 'ind-blue')">
             ♡ Favourites
+        </button>
+        <button class="btn-reset-filters" id="btnResetFilters" onclick="resetFilters()">
+            ↺ Reset filters
         </button>
     </div>
 
@@ -336,6 +346,33 @@
             }
         }
 
+        // ── Trigger keyword search (called by button click and Enter key) ──
+        function triggerSearch() {
+            currentQuery = document.getElementById("searchInput").value.trim();
+            loadDesigns(1);
+        }
+
+        // ── Reset all filters to default state ───────────────────────
+        function resetFilters() {
+            // Clear JS state
+            currentQuery  = "";
+            currentSource = "";
+            mySetupOnly   = false;
+            favsOnly      = false;
+
+            // Clear UI controls
+            document.getElementById("searchInput").value  = "";
+            document.getElementById("sourceFilter").value = "";
+
+            // Reset indicator pills to off
+            const setup = document.getElementById("indSetup");
+            const favs  = document.getElementById("indFavs");
+            setup.className = "filter-indicator ind-off";
+            favs.className  = "filter-indicator ind-off";
+
+            loadDesigns(1);
+        }
+
         // ── Filter indicator pills ───────────────────────────────────
         function toggleIndicator(id, activeClass) {
             const el = document.getElementById(id);
@@ -354,24 +391,10 @@
         }
 
         // ── Init ─────────────────────────────────────────────────────
+        // Note: search button click and Enter key are wired inline on the elements above.
         document.addEventListener("DOMContentLoaded", async () => {
 
-            // Search button
-            document.querySelector("#searchInput + button, .d-flex > button")
-                ?.addEventListener("click", () => {
-                    currentQuery = document.getElementById("searchInput").value.trim();
-                    loadDesigns(1);
-                });
-
-            // Enter key on search input
-            document.getElementById("searchInput").addEventListener("keydown", e => {
-                if (e.key === "Enter") {
-                    currentQuery = e.target.value.trim();
-                    loadDesigns(1);
-                }
-            });
-
-            // Auto-reload when the search field is cleared
+            // Auto-reload when the search field is cleared completely
             document.getElementById("searchInput").addEventListener("input", e => {
                 if (e.target.value === "") {
                     currentQuery = "";

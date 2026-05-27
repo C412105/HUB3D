@@ -13,7 +13,8 @@
   "scripts": {
     "start":      "node server.js",
     "seed":       "node db/seed.js",
-    "import-mmf": "node scripts/importMMF.js",
+    "import-mmf":    "node scripts/importMMF.js",
+    "import-cults":  "node scripts/importCults3D.js",
     "test":       "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
