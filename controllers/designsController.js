@@ -31,27 +31,32 @@ exports.getDesigns = async (req, res) => {
 
 /**
  * getMySetupDesigns — GET /api/designs/my-setup
- * Returns up to 50 designs where compat_check = true, with optional filters.
- * compat_check = true marks designs from API-supported sources (MMF, Cults3D).
+ * Returns a paginated list of designs where compat_check = true (API-backed sources).
+ * Supports the same q / source / page params as getDesigns so the frontend can
+ * paginate correctly without repeating results across pages.
  * NOTE: Full per-printer filtering requires a design↔equipment mapping table —
  *       this is deferred to the post-MVP React phase.
- * @query {string} [q]      - Case-insensitive keyword search on the title field
- * @query {number} [source] - Filter by source_id
- * @returns {200} Design[]
+ * @query {number} [page=1]  - Page number (20 designs per page)
+ * @query {string} [q]       - Case-insensitive keyword search on the title field
+ * @query {number} [source]  - Filter by source_id
+ * @returns {200} { designs: Design[], total: number, page: number, limit: number }
  */
 exports.getMySetupDesigns = async (req, res) => {
-    const { q, source } = req.query;
+    const { q, source, page = 1 } = req.query;
+    const limit  = 20;
+    const offset = (parseInt(page) - 1) * limit;
 
     let query = supabase
         .from("designs")
-        .select("*")
+        .select("*", { count: "exact" })
         .eq("compat_check", true)
-        .limit(50);
+        .order("fetched_at", { ascending: false });
 
     if (source) query = query.eq("source_id", parseInt(source));
     if (q)      query = query.ilike("title", `%${q}%`);
 
-    const { data, error } = await query;
+    const { data, count, error } = await query.range(offset, offset + limit - 1);
     if (error) return res.status(500).json({ error: error.message });
-    res.json(data);
+
+    res.json({ designs: data, total: count, page: parseInt(page), limit });
 };

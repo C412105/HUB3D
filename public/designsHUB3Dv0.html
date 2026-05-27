@@ -241,13 +241,14 @@
                     designs = filtered;
                     total   = filtered.length;
                 } else if (mySetupOnly) {
-                    // Pass active keyword and source filters to the backend
-                    const params = new URLSearchParams();
+                    // Pass active keyword, source filters and page to the backend (server-side paginated)
+                    const params = new URLSearchParams({ page });
                     if (currentQuery)  params.set("q",      currentQuery);
                     if (currentSource) params.set("source", currentSource);
                     const data = await fetch(`/api/designs/my-setup?${params}`).then(r => r.json());
-                    designs = data || [];
-                    total   = designs.length;
+                    designs = data.designs || [];
+                    total   = data.total   || 0;
+                    limit   = data.limit   || 20;
                 } else {
                     // Standard paginated load with optional filters
                     const params = new URLSearchParams({ page });
