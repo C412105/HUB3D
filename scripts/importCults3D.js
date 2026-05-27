@@ -38,9 +38,10 @@ const QUERIES = [
     "miniature",
 ];
 
-// ── Build Basic-Auth header from the API key ─────────────────
+// ── Build Basic-Auth header: email:api_key (required by Cults3D) ─
 function authHeader() {
-    const encoded = Buffer.from(`${CULTS3D_API_KEY}:`).toString("base64");
+    const user    = process.env.CULTS3D_USER;
+    const encoded = Buffer.from(`${user}:${CULTS3D_API_KEY}`).toString("base64");
     return `Basic ${encoded}`;
 }
 
@@ -111,6 +112,11 @@ async function run() {
     if (!CULTS3D_API_KEY) {
         console.error("❌  CULTS3D_API_KEY is not set in .env");
         console.error("    Get a key at https://cults3d.com/en/api");
+        process.exit(1);
+    }
+    if (!process.env.CULTS3D_USER) {
+        console.error("❌  CULTS3D_USER is not set in .env");
+        console.error("    Set it to your Cults3D account email address");
         process.exit(1);
     }
     if (!process.env.SUPABASE_SERVICE_KEY) {
