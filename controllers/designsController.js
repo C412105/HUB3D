@@ -31,20 +31,27 @@ exports.getDesigns = async (req, res) => {
 
 /**
  * getMySetupDesigns — GET /api/designs/my-setup
- * Returns up to 50 designs where compat_check = true.
- * compat_check = true marks designs from API-supported sources (MMF, Cults3D)
- * that can be fetched and verified programmatically.
+ * Returns up to 50 designs where compat_check = true, with optional filters.
+ * compat_check = true marks designs from API-supported sources (MMF, Cults3D).
  * NOTE: Full per-printer filtering requires a design↔equipment mapping table —
  *       this is deferred to the post-MVP React phase.
+ * @query {string} [q]      - Case-insensitive keyword search on the title field
+ * @query {number} [source] - Filter by source_id
  * @returns {200} Design[]
  */
 exports.getMySetupDesigns = async (req, res) => {
-    const { data, error } = await supabase
+    const { q, source } = req.query;
+
+    let query = supabase
         .from("designs")
         .select("*")
         .eq("compat_check", true)
         .limit(50);
 
+    if (source) query = query.eq("source_id", parseInt(source));
+    if (q)      query = query.ilike("title", `%${q}%`);
+
+    const { data, error } = await query;
     if (error) return res.status(500).json({ error: error.message });
     res.json(data);
 };

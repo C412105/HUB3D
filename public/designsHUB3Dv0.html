@@ -228,14 +228,24 @@
 
             try {
                 if (favsOnly) {
-                    // Load user's favourites (returns design objects directly)
-                    const data = await fetch("/api/favourites",
+                    // Load all favourites then apply active keyword/source filters client-side
+                    const raw = await fetch("/api/favourites",
                         { headers: { "x-user-id": userId } }).then(r => r.json());
-                    designs = data || [];
-                    total   = designs.length;
+                    let filtered = raw || [];
+                    if (currentQuery)
+                        filtered = filtered.filter(d =>
+                            d.title?.toLowerCase().includes(currentQuery.toLowerCase()));
+                    if (currentSource)
+                        filtered = filtered.filter(d =>
+                            String(d.source_id) === String(currentSource));
+                    designs = filtered;
+                    total   = filtered.length;
                 } else if (mySetupOnly) {
-                    // Load compat_check = TRUE designs
-                    const data = await fetch("/api/designs/my-setup").then(r => r.json());
+                    // Pass active keyword and source filters to the backend
+                    const params = new URLSearchParams();
+                    if (currentQuery)  params.set("q",      currentQuery);
+                    if (currentSource) params.set("source", currentSource);
+                    const data = await fetch(`/api/designs/my-setup?${params}`).then(r => r.json());
                     designs = data || [];
                     total   = designs.length;
                 } else {
