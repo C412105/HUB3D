@@ -1,7 +1,14 @@
 // controllers/usersController.js
 const supabase = require("../db/supabaseClient");
 
-// ── POST /api/users/register ────────────────────────────────
+/**
+ * register — POST /api/users/register
+ * Creates a new Supabase Auth user and inserts a matching row in `profiles`.
+ * @body  {string} email     - Valid email address
+ * @body  {string} username  - Display name (derived from email in the frontend)
+ * @body  {string} password  - Minimum 8 characters
+ * @returns {201} { message, user: { id, username } }
+ */
 exports.register = async (req, res) => {
     const { email, username, password } = req.body;
 
@@ -39,7 +46,13 @@ exports.register = async (req, res) => {
     });
 };
 
-// ── POST /api/users/login ───────────────────────────────────
+/**
+ * login — POST /api/users/login
+ * Authenticates against Supabase Auth and fetches the user's profile row.
+ * @body  {string} email    - Registered email address
+ * @body  {string} password - Account password
+ * @returns {200} { message, userId, username, joinedAt }
+ */
 exports.login = async (req, res) => {
     const { email, password } = req.body;
 
@@ -62,13 +75,19 @@ exports.login = async (req, res) => {
 
     res.json({
         message: "Login successful",
-        userId: data.user.id,
+        userId:  data.user.id,
         username: profile?.username,
         joinedAt: profile?.created_at
     });
 };
 
-// ── POST /api/users/logout ──────────────────────────────────
+/**
+ * logout — POST /api/users/logout
+ * Terminates the server-side Supabase Auth session.
+ * The client must also clear sessionStorage independently
+ * (handled by the logout button in profileHUB3Dv0.html).
+ * @returns {200} { message: "Logged out" }
+ */
 exports.logout = async (req, res) => {
     const { error } = await supabase.auth.signOut();
     if (error) return res.status(500).json({ error: error.message });

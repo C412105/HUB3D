@@ -1,4 +1,22 @@
-// Express entry point
+/**
+ * server.js — HUB3D Express entry point
+ *
+ * Middleware stack (applied in order):
+ *   cors()           — allows cross-origin requests from the frontend dev server
+ *   express.json()   — parses incoming JSON request bodies
+ *   express.static() — serves HTML / CSS / JS directly from /public
+ *
+ * Route groups mounted:
+ *   /api/users       → registration, login, logout          (routes/users.js)
+ *   /api/designs     → paginated catalog + my-setup filter  (routes/designs.js)
+ *   /api/equipment   → printer/filament catalog + user CRUD (routes/equipment.js)
+ *   /api/favourites  → per-user favourites CRUD             (routes/favourites.js)
+ *   /api/feedback    → anonymous feedback submissions        (routes/feedback.js)
+ *
+ * Static files are served from the /public directory.
+ * Root path (/) redirects to homeHUB3Dv0.html.
+ */
+
 const express = require("express");
 const cors    = require("cors");
 require("dotenv").config();

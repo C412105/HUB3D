@@ -2,17 +2,30 @@ const express    = require("express");
 const router     = express.Router();
 const controller = require("../controllers/equipmentController");
 
-// All available printers/filaments (for the Add collapse)
-router.get("/printers",          controller.getAllPrinters);
-router.get("/filaments",         controller.getAllFilaments);
+// ── Catalog routes (no auth required) ──────────────────────────────────────
+// Return the full printer catalog (used to populate the Add Printer collapse)
+router.get("/printers",                          controller.getAllPrinters);
 
-// User's own equipment
-router.get("/user-printers",     controller.getUserPrinters);
-router.post("/user-printers",    controller.addUserPrinters);
-router.delete("/user-printers/:printerId", controller.removeUserPrinter);
+// Return the full filament catalog (used to populate the Add Filament collapse)
+router.get("/filaments",                         controller.getAllFilaments);
 
-router.get("/user-filaments",    controller.getUserFilaments);
-router.post("/user-filaments",   controller.addUserFilaments);
-router.delete("/user-filaments/:filamentId", controller.removeUserFilament);
+// ── User equipment routes (require x-user-id header) ───────────────────────
+// Return printers saved to the authenticated user's setup
+router.get("/user-printers",                     controller.getUserPrinters);
+
+// Save an array of selected printer IDs to the authenticated user's setup
+router.post("/user-printers",                    controller.addUserPrinters);
+
+// Remove one printer from the authenticated user's setup
+router.delete("/user-printers/:printerId",       controller.removeUserPrinter);
+
+// Return filaments saved to the authenticated user's setup
+router.get("/user-filaments",                    controller.getUserFilaments);
+
+// Save an array of selected filament IDs to the authenticated user's setup
+router.post("/user-filaments",                   controller.addUserFilaments);
+
+// Remove one filament from the authenticated user's setup
+router.delete("/user-filaments/:filamentId",     controller.removeUserFilament);
 
 module.exports = router;

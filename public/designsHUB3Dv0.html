@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Browse 3D printable designs from MyMiniFactory, Cults3D, Thingiverse and more, filtered by your printer and materials.">
+    <meta name="description" content="Browse and filter thousands of 3D printable designs from MyMiniFactory, Cults3D, Thingiverse and Printables.">
     <title>HUB3D — Designs</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -53,9 +53,11 @@
     <!-- ========================== CONTENT ========================== -->
     <main class="page-content container mt-4 mb-5">
 
-    <!-- FILTERS -->
+    <!-- ========================== FILTERS ========================== -->
+    <!-- Search input + filter dropdowns. Source filter is wired to loadDesigns();
+         Printer and Filament dropdowns are disabled stubs for the demo (coming soon). -->
     <div class="row g-2 align-items-start mb-3">
-        <!-- LEFT: search bar + button -->
+        <!-- LEFT: keyword search -->
         <div class="col-12 col-md-6">
             <div class="d-flex gap-2">
                 <input type="text" id="searchInput" class="form-control"
@@ -78,30 +80,16 @@
                     <option value="3">★★★☆☆ 3+ stars</option>
                 </select>
 
-                <!-- Printer -->
-                <select id="printerFilter" class="form-select filter-select" aria-label="Filter by printer">
-                    <option value="">All printers</option>
-                    <option value="ender3">Ender 3</option>
-                    <option value="ender3pro">Ender 3 Pro</option>
-                    <option value="prusaMK4">Prusa MK4</option>
-                    <option value="bambuX1">Bambu Lab X1</option>
-                    <option value="bambuP1S">Bambu Lab P1S</option>
-                    <option value="kobra">Anycubic Kobra</option>
-                    <option value="voron">Voron 2.4</option>
-                    <option value="artillery">Artillery Sidewinder</option>
+                <!-- Printer (coming soon — no DB column to filter against yet) -->
+                <select id="printerFilter" class="form-select filter-select" aria-label="Filter by printer"
+                        disabled title="Printer filter — coming soon">
+                    <option value="">Printer (coming soon)</option>
                 </select>
 
-                <!-- Filament -->
-                <select id="filamentFilter" class="form-select filter-select" aria-label="Filter by filament">
-                    <option value="">All filaments</option>
-                    <option value="pla">PLA</option>
-                    <option value="petg">PETG</option>
-                    <option value="abs">ABS</option>
-                    <option value="tpu">TPU</option>
-                    <option value="asa">ASA</option>
-                    <option value="nylon">Nylon</option>
-                    <option value="hips">HIPS</option>
-                    <option value="resin">Resin</option>
+                <!-- Filament (coming soon — no DB column to filter against yet) -->
+                <select id="filamentFilter" class="form-select filter-select" aria-label="Filter by filament"
+                        disabled title="Filament filter — coming soon">
+                    <option value="">Filament (coming soon)</option>
                 </select>
 
                 <!-- Source (values = source_id in design_sources table) -->
@@ -117,7 +105,11 @@
         </div>
     </div>
 
-    <!-- Filter indicator pills -->
+    <!-- ========================== FILTER INDICATOR PILLS ==========================
+         Toggle buttons that activate special filter modes.
+         Green = My Setup Only (compat_check = true designs)
+         Blue  = Favourites   (user's saved designs)
+         toggleIndicator() handles mutual exclusivity and calls loadDesigns(1). -->
     <div class="d-flex gap-3 mb-4">
         <button class="filter-indicator ind-off" id="indSetup"
                 onclick="toggleIndicator('indSetup', 'ind-green')">
@@ -129,7 +121,9 @@
         </button>
     </div>
 
-        <!-- Designs grid — populated dynamically by JS from GET /api/designs -->
+        <!-- ========================== DESIGNS GRID ==========================
+             Cards injected here by renderCard() on each loadDesigns() call.
+             Bootstrap responsive grid: 2 → 3 → 4 → 5 columns as screen widens. -->
         <div id="designsGrid"
              class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xl-5 g-3 mb-4">
             <!-- cards injected here -->
@@ -186,7 +180,8 @@
             return `
                 <div class="col">
                     <div class="design-card h-100">
-                        <a href="${href}" target="_blank">
+                        <!-- Thumbnail links to the original design page -->
+                        <a href="${href}" target="_blank" rel="noopener noreferrer">
                             <img src="${thumb}"
                                  class="card-img-top"
                                  alt="${design.title}"
@@ -194,7 +189,10 @@
                         </a>
                         <div class="card-body">
                             <div>
-                                <p class="card-title mb-0">${design.title}</p>
+                                <!-- Title also links to the original design page -->
+                                <a href="${href}" target="_blank" rel="noopener noreferrer" class="card-title-link">
+                                    <p class="card-title mb-0">${design.title}</p>
+                                </a>
                                 <p class="card-source">${source}</p>
                             </div>
                             <button class="${heartClass}"

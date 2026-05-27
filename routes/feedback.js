@@ -1,9 +1,8 @@
-// routes/feedback.js
 const express = require("express");
 const router  = express.Router();
 const ctrl    = require("../controllers/feedbackController");
 
-// POST /api/feedback
+// Submit an anonymous feedback message (no auth required)
 router.post("/", ctrl.submitFeedback);
 
 module.exports = router;

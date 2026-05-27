@@ -1,7 +1,14 @@
 // controllers/feedbackController.js
 const supabase = require("../db/supabaseClient");
 
-// POST /api/feedback — anonymous, no auth required
+/**
+ * submitFeedback — POST /api/feedback
+ * Saves an anonymous feedback message to the `feedback` table.
+ * No authentication required — no user data is attached to the submission.
+ * Server-side length validation mirrors the client-side cooldown guard.
+ * @body   {string} message - Feedback text, 5–1000 characters
+ * @returns {200} { message: "Feedback received — thank you!" }
+ */
 exports.submitFeedback = async (req, res) => {
     const { message } = req.body;
 

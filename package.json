@@ -12,6 +12,7 @@
   "main": "HUB3dv0.js",
   "scripts": {
     "start":      "node server.js",
+    "seed":       "node db/seed.js",
     "import-mmf": "node scripts/importMMF.js",
     "test":       "echo \"Error: no test specified\" && exit 1"
   },

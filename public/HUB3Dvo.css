@@ -439,6 +439,22 @@ select.filter-select option {
     margin-bottom: 0;
 }
 
+/* Card title link — inherits text color, no underline decoration */
+.design-card .card-title-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.design-card .card-title-link:hover .card-title {
+    color: #5db1ff;
+}
+
+/* Disabled filter dropdowns (Coming soon stubs) */
+select.filter-select:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
 /* Favourite button (Heart) — Unchecked by default */
 .design-card .fav-btn {
     background: none;

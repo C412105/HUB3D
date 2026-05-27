@@ -1,7 +1,15 @@
+// controllers/designsController.js
 const supabase = require("../db/supabaseClient");
 
-// ── GET /api/designs ────────────────────────────────────────
-// Optional query params: ?source=1&q=keyword&page=1
+/**
+ * getDesigns — GET /api/designs
+ * Returns a paginated list of designs with optional filters.
+ * Results are ordered by fetched_at descending (newest first).
+ * @query {number} [page=1]  - Page number (20 designs per page)
+ * @query {number} [source]  - Filter by source_id (1=MMF, 2=Cults3D, 3=Thingiverse, 4=Printables)
+ * @query {string} [q]       - Case-insensitive keyword search on the title field
+ * @returns {200} { designs: Design[], total: number, page: number, limit: number }
+ */
 exports.getDesigns = async (req, res) => {
     const { source, q, page = 1 } = req.query;
     const limit  = 20;
@@ -21,9 +29,15 @@ exports.getDesigns = async (req, res) => {
     res.json({ designs: data, total: count, page: parseInt(page), limit });
 };
 
-// ── GET /api/designs/my-setup ───────────────────────────────
-// Returns designs where compat_check = TRUE (only supported sources)
-// TO DO after MVP: Full printer-level filtering requires additional compatibility mapping tables.
+/**
+ * getMySetupDesigns — GET /api/designs/my-setup
+ * Returns up to 50 designs where compat_check = true.
+ * compat_check = true marks designs from API-supported sources (MMF, Cults3D)
+ * that can be fetched and verified programmatically.
+ * NOTE: Full per-printer filtering requires a design↔equipment mapping table —
+ *       this is deferred to the post-MVP React phase.
+ * @returns {200} Design[]
+ */
 exports.getMySetupDesigns = async (req, res) => {
     const { data, error } = await supabase
         .from("designs")
