@@ -35,6 +35,16 @@ nav#navbar {
     border-radius: 16px;
 }
 
+/* Uniform inner padding */
+nav#navbar .container-fluid {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+}
+
+nav#navbar .navbar-nav {
+    margin-right: 0 !important;
+}
+
 /* FOOTER */
 footer#disclaimer {
     background: linear-gradient(to right, #545454, #262624);
@@ -44,17 +54,6 @@ footer#disclaimer {
 /* Navbar visual fix (mx-3 and my-3 = 1rem) */
 nav#navbar {
     margin: 1rem;
-}
-
-/* Uniform inner padding — balances logo-left vs. links-right spacing */
-nav#navbar .container-fluid {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-}
-
-/* Remove the me-4 asymmetry; container padding handles both sides equally */
-nav#navbar .navbar-nav {
-    margin-right: 0 !important;
 }
 
 /* Navbar toggle into burger icon */
@@ -555,8 +554,8 @@ div#pagination .pagination {
 }
 
 .btn-reset-filters:hover {
-    border-color: #5db1ff;
-    color: #5db1ff;
+    border-color: #545454;
+    color: #262624;
 }
 
 /* ========================== PROFILE PAGE ==========================*/
